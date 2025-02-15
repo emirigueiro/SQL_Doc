@@ -25,6 +25,7 @@
 -- Historical Versions:
 
 -- 2025-01-01: created Query.
+-- 2025-02-010: se elimino una de los ids considerados para las campañas. 
 ---------------------------------------------------------------------------------------------------------------
 
 
