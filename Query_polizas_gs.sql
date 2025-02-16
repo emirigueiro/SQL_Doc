@@ -1,4 +1,4 @@
----------------------------------------------------------------------------------------------------------------
+
 --Sumery:
 
 --Created Date: 2025-01-01
@@ -28,10 +28,9 @@
 -- 2025-02-010: se elimino una de los ids considerados para las campañas. 
 ---------------------------------------------------------------------------------------------------------------
 
-
 CREATE OR REPLACE TABLE hive_metastore.default.hsbc_altas AS
 ---------------------------------------------------------------------------------------------------------------
---Step 1: Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas:
+--Step 1: Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas--
 WITH tmp_1 AS
 (
 SELECT 
@@ -49,22 +48,22 @@ VENDEDOR    AS vendedor,
 
 FROM prod_bronze.vt7.qv_vt7_estructuragestion
 
-WHERE ID_ESTRUC_GESTION in (85,86)                                               --LC: Se limitan las altas por id de estructura de gestion
-AND NCERTIF = 0                                                                  --LC: Se limita el universo a la primera póliza (certificado) 
+WHERE ID_ESTRUC_GESTION in (85,86)                                               --LC: Se limitan las altas por id de estructura de gestion--
+AND NCERTIF = 0                                                                  --LC: Se limita el universo a la primera póliza (certificado)--
 )
 ---------------------------------------------------------------------------------------------------------------
---Step 2: Proceso para obtener las altas de HSBC que se gestionana a travez de campañas:
+--Step 2: Proceso para obtener las altas de HSBC que se gestionana a travez de campañas--
 
--- Step 2_1: Se genera una temporal con las solicitudes generadas en las campañas de HSBC.
+--Step 2_1: Se genera una temporal con las solicitudes generadas en las campañas de HSBC--
 , tmp_2 AS 
 (
 SELECT * FROM prod_bronze.engage.cust_gestiones
 
-WHERE campana in (220,221,222,225,224)                                            --LC: Se limita el universo solo a las campañas de HSBC
-AND ES_VENTA = 'SI'                                                               --LC: Trae solamente las gestiones de ventas. 
+WHERE campana in (220,221,222,225,224)                                            --LC: Se limita el universo solo a las campañas de HSBC--
+AND ES_VENTA = 'SI'                                                               --LC: Trae solamente las gestiones de ventas-- 
 )
 
--- Step 2_2: Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza:
+-- Step 2_2: Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza--
 , tmp_3 AS
 (
 SELECT 
@@ -78,12 +77,12 @@ gest.canal                      AS id_canal,
 gest.subcanal                   AS id_subcanal,
 gest.CAMPANA                    AS id_campania,
 gest.AGENTE                     AS vendedor,
-1                               AS flg_campania                        --LC: Generarmo un flg para identifiar aquellas pólizas provenientes de campañas
+1                               AS flg_campania                        --LC: Generarmo un flg para identifiar aquellas pólizas provenientes de campañas--
 
 FROM tmp_2 AS gest LEFT JOIN prod_bronze.mktinfo.cotizacion_vt7 AS coti ON gest.NRO_SOLICITUD = COTI.NPOLICYSOL AND gest.PRODUCTO = coti.NPRODUCT
 )
 
--- Step 2_3: Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol, id_producto, id_branch
+-- Step 2_3: Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol, id_producto, id_branch--
 , tmp_3_5
 (
 SELECT 
@@ -97,12 +96,12 @@ NULL                             AS id_canal,
 NULL                             AS id_subcanal,
 tmp_3.id_campania,
 tmp_3.vendedor,
-1                                AS flg_campania                       --LC: Generamos un flg para identifiar aquellas pólizas provenientes de campañas.      
+1                                AS flg_campania                       --LC: Generamos un flg para identifiar aquellas pólizas provenientes de campañas--      
 
 FROM tmp_3 LEFT JOIN (SELECT * FROM prod_gold_summarized.migs_upgraded.certificados WHERE flg_traspaso is null) AS cert ON tmp_3.num_solicitud = cert.NPROPONUM AND tmp_3.id_producto = cert.NPRODUCT
 )
 
--- Step 2_4: Se realiza un cruce con cotizaciones para traer los datos de id_canal y id_subcanal ya que en certificados esta incompleto.
+-- Step 2_4: Se realiza un cruce con cotizaciones para traer los datos de id_canal y id_subcanal ya que en certificados esta incompleto--
 , tmp_3_6 AS
 (
 SELECT
@@ -116,13 +115,13 @@ estr.id_canal                AS id_canal,
 estr.id_subcanal             AS id_subcanal,
 tmp_3_5.id_campania,
 tmp_3_5.vendedor,
-tmp_3_5.flg_campania                                                   --LC: Generarmo un flg para identifiar aquellas pólizas provenientes de campañas     
+tmp_3_5.flg_campania                                                   --LC: Generarmo un flg para identifiar aquellas pólizas provenientes de campañas--     
 
 FROM tmp_3_5 LEFT JOIN prod_bronze.vt7.qv_vt7_estructuragestion AS estr ON tmp_3_5.num_pol = estr.NPOLICY AND tmp_3_5.id_producto = estr.NPRODUCT
 )
 
 ---------------------------------------------------------------------------------------------------------------
---Step 3: unificación entre pólizas provenientes de "estructura de gestion" y "campañias": 
+--Step 3: unificación entre pólizas provenientes de "estructura de gestion" y "campañias"-- 
 
 , tmp_4 AS
 (
@@ -133,9 +132,9 @@ UNION ALL
 SELECT * FROM tmp_3_6
 )
 ---------------------------------------------------------------------------------------------------------------
---Step 4: Cruce con certificados para sumar dimensiones: fec_emi, facturacion, tiene_siniestro, ramo, motivo_anulacion y punto de venta.  
+--Step 4: Cruce con certificados para sumar dimensiones: fec_emi, facturacion, tiene_siniestro, ramo, motivo_anulacion y punto de venta-- 
 
--- Step 4_1: Preparacion de la tabla de certificados para dejar la última actualización de cada registro.
+--Step 4_1: Preparacion de la tabla de certificados para dejar la última actualización de cada registro--
 , tmp_5 AS 
 (
 SELECT
@@ -157,15 +156,15 @@ SELECT
 FROM prod_gold_summarized.migs_upgraded.certificados 
 
 WHERE NCERTIF = 0
-AND flg_traspaso is null                                                   --LC: Se excluyen aquellas pólizas que fueron traspasos ya que no deben ser consideraras altas. 
+AND flg_traspaso is null                                                   --LC: Se excluyen aquellas pólizas que fueron traspasos ya que no deben ser consideraras altas--
 )
 
--- Step 4_2: Join entre las pólizas de HSBC y la tabla de certificados.
+--Step 4_2: Join entre las pólizas de HSBC y la tabla de certificados--
 , tmp_6 AS
 (
 SELECT
       tmp_4.*,
-      CASE WHEN id_producto = 5000 THEN 1 ELSE cert.NCERTIF END AS NCERTIF, --LC: Se modifica el número de certif. para los productos SIP (Id_producto 5000), por que el premio se carga con número de certificado 1)  
+      CASE WHEN id_producto = 5000 THEN 1 ELSE cert.NCERTIF END AS NCERTIF, --LC: Se modifica el número de certif. para los productos SIP (Id_producto 5000), por que el premio se carga con número de certificado 1)--  
       cert.desc_facturacion,
       cert.fec_emi,
       cert.tiene_siniestro,
@@ -177,9 +176,9 @@ SELECT
 FROM tmp_4 LEFT JOIN tmp_5 AS cert ON (tmp_4.num_pol = cert.NPOLICY AND tmp_4.id_branch = cert.NBRANCH AND tmp_4.id_producto = cert.NPRODUCT AND tmp_4.ncertifpol = cert.NCERTIF)                              
 )
 ---------------------------------------------------------------------------------------------------------------
---Step 5: Cruce con emisones para traer el dato de premio.  
+--Step 5: Cruce con emisones para traer el dato de premio--  
 
---Step 5_1: Preparacion de la tabla de emisiones.
+--Step 5_1: Preparacion de la tabla de emisiones--
 , tmp_7 AS
 (
 SELECT
@@ -196,18 +195,18 @@ SELECT
 FROM prod_gold_summarized.migs_upgraded.emision
 )
 
--- Step_5_2: Se filtran los NTYP y se dejan los registros con la ultima fecha de emisión. 
+--Step 5_2: Se filtran los NTYP y se dejan los registros con la ultima fecha de emisión--
 , tmp_8 AS
 (
 SELECT 
       *
 FROM tmp_7
 
-WHERE NTYPE in (1,7,9,10,33)                                                        --LC: Me lo comento Joa (esto se lo informo Dani Cano a ella)
-AND rw = 1                                                                          --LC: Son los registros con última fecha de emisión 
+WHERE NTYPE in (1,7,9,10,33)                                                        --LC: Me lo comento Joa (esto se lo informo Dani Cano a ella)--
+AND rw = 1                                                                          --LC: Son los registros con última fecha de emisión-- 
 )
 
--- Step 5_3: Join entre las polizas de HSBC - Certificados con Emisiones.
+--Step 5_3: Join entre las polizas de HSBC - Certificados con Emisiones--
 , tmp_9 AS
 (
 SELECT
@@ -215,15 +214,15 @@ SELECT
        emision.premio,
        emision.prima,
        emision.primapura,
-       CASE WHEN tmp_6.NCERTIF IS NULL THEN 1 ELSE 0 END AS flg_no_esta_en_certificados,                                       --LC: Se crea un flg para identificar aquellas pólizas que no aparecen en "Certificados"
-       CASE WHEN emision.premio is null THEN 1 ELSE 0 END AS flg_no_tiene_premio,                                              --LC: Se crea un flg para identificar aquellas pólizas que no tiene dato de premio/prima cargado en emmisiones.
-       CASE WHEN (num_solicitud != 0 OR num_solicitud is not null) AND num_pol is null THEN 1 ELSE 0 END AS flg_solic_sin_alta --LC: Identificamos aquellas solicitudes provenientes de campañas que no terminan en alta. 
+       CASE WHEN tmp_6.NCERTIF IS NULL THEN 1 ELSE 0 END AS flg_no_esta_en_certificados,                                       --LC: Se crea un flg para identificar aquellas pólizas que no aparecen en "Certificados"--
+       CASE WHEN emision.premio is null THEN 1 ELSE 0 END AS flg_no_tiene_premio,                                              --LC: Se crea un flg para identificar aquellas pólizas que no tiene dato de premio/prima cargado en emmisiones--
+       CASE WHEN (num_solicitud != 0 OR num_solicitud is not null) AND num_pol is null THEN 1 ELSE 0 END AS flg_solic_sin_alta --LC: Identificamos aquellas solicitudes provenientes de campañas que no terminan en alta-- 
 
 FROM tmp_6 LEFT JOIN tmp_8 AS emision ON tmp_6.num_pol = emision.NPOLICY AND tmp_6.id_branch = emision.NBRANCH AND tmp_6.id_producto = emision.NPRODUCT AND tmp_6.NCERTIF = emision.NCERTIF 
 )
 
 ---------------------------------------------------------------------------------------------------------------
---Step 6: Cruce con estrucutra de gestión para sumar descripciones de códigos: 
+--Step 6: Cruce con estrucutra de gestión para sumar descripciones de códigos-- 
 
 , tmp_10 AS
 (
@@ -238,7 +237,7 @@ FROM tmp_9 AS hsbc LEFT JOIN (SELECT id_canal, canal FROM prod_bronze.vt7.qv_vt7
                    LEFT JOIN (SELECT nproduct, tipo_de_Producto FROM prod_bronze.vt7.qv_vt7_estructuragestion GROUP BY nproduct, tipo_de_Producto) AS lkp3 ON hsbc.id_producto = lkp3.nproduct                    
 )
 ---------------------------------------------------------------------------------------------------------------
---Step 7: Se corrigue el campo punto_venta para que CVT figure como Telemarketing.
+--Step 7: Se corrigue el campo punto_venta para que CVT figure como Telemarketing--
 , tmp_11 AS
 (
 SELECT
@@ -273,7 +272,7 @@ FROM tmp_10
 
 )
 ---------------------------------------------------------------------------------------------------------------
---Step 8: Unificación con tabla presupuesto HSBC para sumar al final de la tabla los registros con los datos correspondientes al prespuesto por producto y punto de venta:
+--Step 8: Unificación con tabla presupuesto HSBC para sumar al final de la tabla los registros con los datos correspondientes al prespuesto por producto y punto de venta--
 
 , tmp_12 AS
 (
@@ -322,5 +321,5 @@ FROM hive_metastore.default.hsbc_presupuestos
 )
  
 ---------------------------------------------------------------------------------------------------------------
---Step 8: Final Select: 
+--Step 8: Final Select-- 
 SELECT * FROM tmp_12 
