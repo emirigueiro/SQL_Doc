@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista en HTML</title>
+    <style>
+        body {
+            background-color: #333333; /* Gris oscuro */
+            color: #CCCCCC; /* Letras gris claro */
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .arrow {
+            display: inline-block;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>Step  1: Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas <span class='arrow'>&#8594;</span></li>
+        <li>Step  2: Proceso para obtener las altas de HSBC que se gestionana a travez de campañas <span class='arrow'>&#8594;</span></li>
+        <li>Step  2_1: Se genera una temporal con las solicitudes generadas en las campañas de HSBC <span class='arrow'>&#8594;</span></li>
+        <li>Step  2_2: Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza <span class='arrow'>&#8594;</span></li>
+        <li>Step  2_3: Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol id_producto id_branch <span class='arrow'>&#8594;</span></li>
+        <li>Step  2_4: Se realiza un cruce con cotizaciones para traer los datos de id_canal y id_subcanal ya que en certificados esta incompleto <span class='arrow'>&#8594;</span></li>
+        <li>Step  3: unificación entre pólizas provenientes de "estructura de gestion" y "campañias" <span class='arrow'>&#8594;</span></li>
+        <li>Step  4: Cruce con certificados para sumar dimensiones: fec_emi facturacion tiene_siniestro ramo motivo_anulacion y punto de venta <span class='arrow'>&#8594;</span></li>
+        <li>Step  4_1: Preparacion de la tabla de certificados para dejar la última actualización de cada registro <span class='arrow'>&#8594;</span></li>
+        <li>Step  4_2: Join entre las pólizas de HSBC y la tabla de certificados <span class='arrow'>&#8594;</span></li>
+        <li>Step  5: Cruce con emisones para traer el dato de premio <span class='arrow'>&#8594;</span></li>
+        <li>Step  5_1: Preparacion de la tabla de emisiones <span class='arrow'>&#8594;</span></li>
+        <li>Step  5_2: Se filtran los NTYP y se dejan los registros con la ultima fecha de emisión <span class='arrow'>&#8594;</span></li>
+        <li>Step  5_3: Join entre las polizas de HSBC - Certificados con Emisiones <span class='arrow'>&#8594;</span></li>
+        <li>Step  6: Cruce con estrucutra de gestión para sumar descripciones de códigos <span class='arrow'>&#8594;</span></li>
+        <li>Step  7: Se corrigue el campo punto_venta para que CVT figure como Telemarketing <span class='arrow'>&#8594;</span></li>
+        <li>Step  8: Unificación con tabla presupuesto HSBC para sumar al final de la tabla los registros con los datos correspondientes al prespuesto por producto y punto de venta <span class='arrow'>&#8594;</span></li>
+        <li>Step  8: Final Select <span class='arrow'>&#8594;</span></li>
+        <li>LC : Se limitan las altas por id de estructura de gestion <span class='arrow'>&#8594;</span></li>
+        <li>LC : Se limita el universo a la primera póliza certificado <span class='arrow'>&#8594;</span></li>
+        <li>LC : Se limita el universo solo a las campañas de HSBC <span class='arrow'>&#8594;</span></li>
+        <li>LC : Trae solamente las gestiones de ventas <span class='arrow'>&#8594;</span></li>
+        <li>LC : Generarmo un flg para identifiar aquellas pólizas provenientes de campañas <span class='arrow'>&#8594;</span></li>
+        <li>LC : Generamos un flg para identifiar aquellas pólizas provenientes de campañas <span class='arrow'>&#8594;</span></li>
+        <li>LC : Generarmo un flg para identifiar aquellas pólizas provenientes de campañas <span class='arrow'>&#8594;</span></li>
+        <li>LC : Se excluyen aquellas pólizas que fueron traspasos ya que no deben ser consideraras altas <span class='arrow'>&#8594;</span></li>
+        <li>LC : Se modifica el número de certif. para los productos SIP Id_producto 5000 por que el premio se carga con número de certificado 1 <span class='arrow'>&#8594;</span></li>
+        <li>LC : Me lo comento Joa esto se lo informo Dani Cano a ella <span class='arrow'>&#8594;</span></li>
+        <li>LC : Son los registros con última fecha de emisión <span class='arrow'>&#8594;</span></li>
+        <li>LC : Se crea un flg para identificar aquellas pólizas que no aparecen en "Certificados" <span class='arrow'>&#8594;</span></li>
+        <li>LC : Se crea un flg para identificar aquellas pólizas que no tiene dato de premio/prima cargado en emmisiones <span class='arrow'>&#8594;</span></li>
+        <li>LC : Identificamos aquellas solicitudes provenientes de campañas que no terminan en alta <span class='arrow'>&#8594;</span></li>
+
+    </ul>
+</body>
+</html>
