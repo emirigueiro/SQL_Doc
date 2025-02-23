@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Tabla de Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c2c2c;
+            color: #d3d3d3;
+            text-align: center;
+            padding: 20px;
+        }
+        h2 {
+            color: #ffffff;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            background-color: #333;
+            color: #d3d3d3;
+            table-layout: auto;  /* Ajusta el ancho de las columnas al contenido */
+        }
+        th, td {
+            border: 1px solid #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #444;
+        }
+        .Clase {
+            min-width: 100px; /* Ajusta el ancho de la columna Ciudad */
+        }
+    </style>
+</head>
+<body>
+    <h2>Process Coments</h2>
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Order</th>
+      <th class="Clase">Clase</th>
+      <th>Coment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Step 1</td>
+      <td>Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>LC</td>
+      <td>Se limitan las altas por id de estructura de gestion</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>LC</td>
+      <td>Se limita el universo a la primera póliza certificado</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Step 2</td>
+      <td>Proceso para obtener las altas de HSBC que se gestionana a travez de campañas</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Step 2.1</td>
+      <td>Se genera una temporal con las solicitudes generadas en las campañas de HSBC</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>LC</td>
+      <td>Se limita el universo solo a las campañas de HSBC</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>LC</td>
+      <td>Trae solamente las gestiones de ventas</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Step 2.2</td>
+      <td>Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>LC</td>
+      <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Step 2.3</td>
+      <td>Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol id_producto id_branch</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>LC</td>
+      <td>Generamos un flg para identifiar aquellas pólizas provenientes de campañas</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Step 2.4</td>
+      <td>Se realiza un cruce con cotizaciones para traer los datos de id_canal y id_subcanal ya que en certificados esta incompleto</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>LC</td>
+      <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Step 3</td>
+      <td>unificación entre pólizas provenientes de "estructura de gestion" y "campañias"</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Step 4</td>
+      <td>Cruce con certificados para sumar dimensiones</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Step 4.1</td>
+      <td>Preparacion de la tabla de certificados para dejar la última actualización de cada registro</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>LC</td>
+      <td>Se excluyen aquellas pólizas que fueron traspasos ya que no deben ser consideraras altas</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Step 4.2</td>
+      <td>Join entre las pólizas de HSBC y la tabla de certificados</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>LC</td>
+      <td>Se modifica el número de certif. para los productos SIP Id_producto 5000 por que el premio se carga con número de certificado 1</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>Step 5</td>
+      <td>Cruce con emisones para traer el dato de premio</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>Step 5.1</td>
+      <td>Preparacion de la tabla de emisiones</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>Step 5.2</td>
+      <td>Se filtran los NTYP y se dejan los registros con la ultima fecha de emisión</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>LC</td>
+      <td>Me lo comento Joa esto se lo informo Dani Cano a ella</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>LC</td>
+      <td>Son los registros con última fecha de emisión</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>Step 5.3</td>
+      <td>Join entre las polizas de HSBC - Certificados con Emisiones</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>LC</td>
+      <td>Se crea un flg para identificar aquellas pólizas que no aparecen en "Certificados"</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>LC</td>
+      <td>Se crea un flg para identificar aquellas pólizas que no tiene dato de premio/prima cargado en emmisiones</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>LC</td>
+      <td>Identificamos aquellas solicitudes provenientes de campañas que no terminan en alta</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>Step 6</td>
+      <td>Cruce con estrucutra de gestión para sumar descripciones de códigos</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>Step 7</td>
+      <td>Se corrigue el campo punto_venta para que CVT figure como Telemarketing</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>Step 8</td>
+      <td>Unificación con tabla presupuesto HSBC para sumar al final de la tabla los registros con los datos correspondientes al prespuesto por producto y punto de venta</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>Step 8</td>
+      <td>Final Select</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
