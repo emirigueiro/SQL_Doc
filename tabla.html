@@ -21,12 +21,13 @@
             border-collapse: collapse;
             background-color: #333;
             color: #d3d3d3;
+            text-align: left;
             table-layout: auto;  /* Ajusta el ancho de las columnas al contenido */
         }
         th, td {
             border: 1px solid #ffffff;
             padding: 10px;
-            text-align: center;
+            text-align: left;
         }
         th {
             background-color: #444;
@@ -34,6 +35,7 @@
         .Clase {
             min-width: 100px; /* Ajusta el ancho de la columna Ciudad */
         }
+
     </style>
 </head>
 <body>
@@ -43,63 +45,63 @@
     <tr style="text-align: right;">
       <th>Order</th>
       <th class="Clase">Clase</th>
-      <th>Coment</th>
+      <th class="Coment">Coment</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>1</td>
-      <td>Step 1</td>
-      <td>Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas</td>
+      <td class="Coment">1</td>
+      <td class="Coment">Step 1</td>
+      <td class="Coment">Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas</td>
     </tr>
     <tr>
-      <td>2</td>
-      <td>LC</td>
-      <td>Se limitan las altas por id de estructura de gestion</td>
+      <td class="Coment">2</td>
+      <td class="Coment">LC</td>
+      <td class="Coment">Se limitan las altas por id de estructura de gestion</td>
     </tr>
     <tr>
-      <td>3</td>
-      <td>LC</td>
-      <td>Se limita el universo a la primera póliza certificado</td>
+      <td class="Coment">3</td>
+      <td class="Coment">LC</td>
+      <td class="Coment">Se limita el universo a la primera póliza certificado</td>
     </tr>
     <tr>
-      <td>4</td>
-      <td>Step 2</td>
-      <td>Proceso para obtener las altas de HSBC que se gestionana a travez de campañas</td>
+      <td class="Coment">4</td>
+      <td class="Coment">Step 2</td>
+      <td class="Coment">Proceso para obtener las altas de HSBC que se gestionana a travez de campañas</td>
     </tr>
     <tr>
-      <td>5</td>
-      <td>Step 2.1</td>
-      <td>Se genera una temporal con las solicitudes generadas en las campañas de HSBC</td>
+      <td class="Coment">5</td>
+      <td class="Coment">Step 2.1</td>
+      <td class="Coment">Se genera una temporal con las solicitudes generadas en las campañas de HSBC</td>
     </tr>
     <tr>
-      <td>6</td>
-      <td>LC</td>
-      <td>Se limita el universo solo a las campañas de HSBC</td>
+      <td class="Coment">6</td>
+      <td class="Coment">LC</td>
+      <td class="Coment">Se limita el universo solo a las campañas de HSBC</td>
     </tr>
     <tr>
-      <td>7</td>
-      <td>LC</td>
-      <td>Trae solamente las gestiones de ventas</td>
+      <td class="Coment">7</td>
+      <td class="Coment">LC</td>
+      <td class="Coment">Trae solamente las gestiones de ventas</td>
     </tr>
     <tr>
-      <td>8</td>
-      <td>Step 2.2</td>
-      <td>Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza</td>
+      <td class="Coment">8</td>
+      <td class="Coment">Step 2.2</td>
+      <td class="Coment">Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza</td>
     </tr>
     <tr>
-      <td>9</td>
-      <td>LC</td>
-      <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
+      <td class="Coment">9</td>
+      <td class="Coment">LC</td>
+      <td class="Coment">Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
     </tr>
     <tr>
-      <td>10</td>
-      <td>Step 2.3</td>
-      <td>Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol id_producto id_branch</td>
+      <td class="Coment">10</td>
+      <td class="Coment">Step 2.3</td>
+      <td class="Coment">Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol id_producto id_branch</td>
     </tr>
     <tr>
-      <td>11</td>
-      <td>LC</td>
+      <td class="Coment">11</td>
+      <td class="Coment">LC</td>
       <td>Generamos un flg para identifiar aquellas pólizas provenientes de campañas</td>
     </tr>
     <tr>
