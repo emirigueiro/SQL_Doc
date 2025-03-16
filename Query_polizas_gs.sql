@@ -1,6 +1,7 @@
 
 --Summary:
 
+
 --Created Date: 2025-01-01
 
 --Description: Esta consulta contiene todas las altas generadas por Galicia +
@@ -22,15 +23,16 @@
 --Procut Type: Table
 --Process Type: Create or Replace
 ---------------------------------------------------------------------------------------------------------------
--- Historical Versions:
+--Historical Versions:
 
--- 2025-01-01: created Query.
--- 2025-02-010: se elimino una de los ids considerados para las campañas. 
+--2025/01/01: created Query.
+--2025/02/01: se elimino una de los ids considerados para las campañas. 
 ---------------------------------------------------------------------------------------------------------------
-
-CREATE OR REPLACE TABLE hive_metastore.default.hsbc_altas AS
 ---------------------------------------------------------------------------------------------------------------
 --Step 1: Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas--
+
+CREATE OR REPLACE TABLE hive_metastore.default.hsbc_altas AS
+
 WITH tmp_1 AS
 (
 SELECT 
