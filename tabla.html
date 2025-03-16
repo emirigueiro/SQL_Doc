@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Process Tabla de Datos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,18 +43,26 @@
         .summary {
             font-family: Arial, sans-serif;
             font-size: 17px; /* Aumenta el tamaño de la letra */
-            background-color: #444;
+            background-color: #f9f9f9;
+            color: #343434;
+            text-align: left;
+            margin: 10px 0 10px 0; /* Ajusta el margen superior e inferior */
+            padding: 10px;
+            border-radius: 10px; /* Redondea los bordes */
         }
-
+        .icono {
+            color: #1fa715; /* Cambia el color del icono */
+        }
     </style>
 </head>
 <body>
     <h2>Summary</h2>
-    <pre class="summary">  <b>Created Date:</b> 2025 01 01
+    <pre class="summary"><h4 style='margin: 5px 0;'>Resumen de la consulta</h4>
+  <i class="fas fa-calendar-alt icono"></i> <b>Created Date:</b> 2025 01 01
 
-  <b>Description:</b> Esta consulta contiene todas las altas generadas por Galicia +
+  <i class="fa-solid fa-pen-to-square icono"></i> <b>Description:</b> Esta consulta contiene todas las altas generadas por Galicia +
 
-  <b>References:</b> for exaple Ticket Jira #1234
+  <i class="fas fa-book icono"></i> <b>References:</b> for exaple Ticket Jira #1234
 
   </pre>
     <h2>Process Comments</h2>
