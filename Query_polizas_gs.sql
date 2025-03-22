@@ -9,10 +9,10 @@
 --References: for exaple Ticket Jira #1234
 
 --Sources:
-          -- rod_bronze.engage.cust_gestiones.
-          -- prod_bronze.mktinfo.cotizacion_vt7.
+          -- rod_bronze.engage.cust_gestiones
+          -- prod_bronze.mktinfo.cotizacion_vt7
           -- prod_gold_summarized.migs_upgraded.certificados
-          -- prod_bronze.vt7.qv_vt7_estructuragestion.
+          -- prod_bronze.vt7.qv_vt7_estructuragestion
           -- prod_gold_summarized.migs_upgraded.emision
           -- hive_metastore.default.hsbc_presupuestos  
 ---------------------------------------------------------------------------------------------------------------
