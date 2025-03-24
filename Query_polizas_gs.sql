@@ -18,9 +18,9 @@
 ---------------------------------------------------------------------------------------------------------------
 --Products: 
 
---Product_1:
+--Product description: tabla con toda las altas de Galicia +
 --Name: hive_metastore.default.hsbc_altas
---Procut Type: Table
+--Product Type: Table
 --Process Type: Create or Replace
 ---------------------------------------------------------------------------------------------------------------
 --Historical Versions:
