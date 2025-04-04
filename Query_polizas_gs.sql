@@ -16,12 +16,20 @@
           -- prod_gold_summarized.migs_upgraded.emision
           -- hive_metastore.default.hsbc_presupuestos  
 ---------------------------------------------------------------------------------------------------------------
---Products: 
+--Product 1: 
 
---Product description: tabla con toda las altas de Galicia +
+--Description: tabla con toda las altas de Galicia +
 --Name: hive_metastore.default.hsbc_altas
---Product Type: Table
---Process Type: Create or Replace
+--Type: Table
+--Process: Create or Replace
+
+------------------------------------------------------
+--Product 2:
+
+--Description: tabla con toda las altas de Galicia +
+--Name: hive_metastore.default.hsbc_altas
+--Type: Table
+--Process: Create or Replace
 ---------------------------------------------------------------------------------------------------------------
 --Historical Versions:
 
