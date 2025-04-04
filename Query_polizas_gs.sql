@@ -33,8 +33,8 @@
 ---------------------------------------------------------------------------------------------------------------
 --Historical Versions:
 
---2025/01/01: created Query.
---2025/02/01: se elimino una de los ids considerados para las campañas. 
+--2025/01/01: (Emiliano Rigueiro) created Query.
+--2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
 ---------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------
 --Step 1: Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas--

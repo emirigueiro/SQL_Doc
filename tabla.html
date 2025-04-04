@@ -99,12 +99,19 @@
   <i class="fa-solid fa-layer-group icono"></i> <b> Type:</b> Table
   <i class="fa-solid fa-code-compare icono"></i> <b>Process:</b> Create or Replace
 
+                                                      
   <i class="fa-solid fa-box-archive icono_2"></i> <b>Product </b>2:
 
   <i class="fa-solid fa-pen-to-square icono"></i> <b> Description:</b> tabla con toda las altas de Galicia +
   <i class="fa-solid fa-hashtag icono"></i></i> <b> Name:</b> hive_metastore.default.hsbc_altas
   <i class="fa-solid fa-layer-group icono"></i> <b> Type:</b> Table
   <i class="fa-solid fa-code-compare icono"></i> <b>Process:</b> Create or Replace
+                                                                                                               
+  </pre>
+    <pre class="source"><h4 style='margin: 5px 0;'>Historical Versions</h4>
+  2025/01/01: (Emiliano Rigueiro) created Query.
+  2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
+                                                                                                               
                                                                                                                
   </pre>
     <h2>Process Comments</h2>
@@ -122,193 +129,193 @@
       <td class="Comment">1</td>
       <td class="Comment">Step  1</td>
       <td class="Comment">Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas</td>
-      <td class="Comment">[39]</td>
+      <td class="Comment">[40]</td>
     </tr>
     <tr>
       <td class="Comment">2</td>
       <td class="Comment">LC</td>
       <td class="Comment">Se limitan las altas por id de estructura de gestion</td>
-      <td class="Comment">[60]</td>
+      <td class="Comment">[61]</td>
     </tr>
     <tr>
       <td class="Comment">3</td>
       <td class="Comment">LC</td>
       <td class="Comment">Se limita el universo a la primera póliza (certificado)</td>
-      <td class="Comment">[61]</td>
+      <td class="Comment">[62]</td>
     </tr>
     <tr>
       <td class="Comment">4</td>
       <td class="Comment">Step  2</td>
       <td class="Comment">Proceso para obtener las altas de HSBC que se gestionana a travez de campañas</td>
-      <td class="Comment">[64]</td>
+      <td class="Comment">[65]</td>
     </tr>
     <tr>
       <td class="Comment">5</td>
       <td class="Comment">Step  2.1</td>
       <td class="Comment">Se genera una temporal con las solicitudes generadas en las campañas de HSBC</td>
-      <td class="Comment">[66]</td>
+      <td class="Comment">[67]</td>
     </tr>
     <tr>
       <td class="Comment">6</td>
       <td class="Comment">LC</td>
       <td class="Comment">Se limita el universo solo a las campañas de HSBC</td>
-      <td class="Comment">[71]</td>
+      <td class="Comment">[72]</td>
     </tr>
     <tr>
       <td class="Comment">7</td>
       <td class="Comment">LC</td>
       <td class="Comment">Trae solamente las gestiones de ventas</td>
-      <td class="Comment">[72]</td>
+      <td class="Comment">[73]</td>
     </tr>
     <tr>
       <td class="Comment">8</td>
       <td class="Comment">Step  2.2</td>
       <td class="Comment">Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza</td>
-      <td class="Comment">[75]</td>
+      <td class="Comment">[76]</td>
     </tr>
     <tr>
       <td>9</td>
       <td>LC</td>
       <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[89, 127]</td>
+      <td>[90, 128]</td>
     </tr>
     <tr>
       <td>10</td>
       <td>Step  2.3</td>
       <td>Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol, id_producto, id_branch</td>
-      <td>[94]</td>
+      <td>[95]</td>
     </tr>
     <tr>
       <td>11</td>
       <td>LC</td>
       <td>Generamos un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[108]</td>
+      <td>[109]</td>
     </tr>
     <tr>
       <td>12</td>
       <td>Step  2.4</td>
       <td>Se realiza un cruce con cotizaciones para traer los datos de id_canal y id_subcanal ya que en certificados esta incompleto</td>
-      <td>[113]</td>
+      <td>[114]</td>
     </tr>
     <tr>
       <td>13</td>
       <td>LC</td>
       <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[89, 127]</td>
+      <td>[90, 128]</td>
     </tr>
     <tr>
       <td>14</td>
       <td>Step  3</td>
       <td>unificación entre pólizas provenientes de "estructura de gestion" y "campañias"</td>
-      <td>[133]</td>
+      <td>[134]</td>
     </tr>
     <tr>
       <td>15</td>
       <td>Step  4</td>
       <td>Cruce con certificados para sumar dimensiones</td>
-      <td>[144]</td>
+      <td>[145]</td>
     </tr>
     <tr>
       <td>16</td>
       <td>Step  4.1</td>
       <td>Preparacion de la tabla de certificados para dejar la última actualización de cada registro</td>
-      <td>[146]</td>
+      <td>[147]</td>
     </tr>
     <tr>
       <td>17</td>
       <td>LC</td>
       <td>Se excluyen aquellas pólizas que fueron traspasos ya que no deben ser consideraras altas</td>
-      <td>[168]</td>
+      <td>[169]</td>
     </tr>
     <tr>
       <td>18</td>
       <td>Step  4.2</td>
       <td>Join entre las pólizas de HSBC y la tabla de certificados</td>
-      <td>[171]</td>
+      <td>[172]</td>
     </tr>
     <tr>
       <td>19</td>
       <td>LC</td>
       <td>Se modifica el número de certif. para los productos SIP (Id_producto 5000), por que el premio se carga con número de certificado 1)</td>
-      <td>[176]</td>
+      <td>[177]</td>
     </tr>
     <tr>
       <td>20</td>
       <td>Step  5</td>
       <td>Cruce con emisones para traer el dato de premio</td>
-      <td>[188]</td>
+      <td>[189]</td>
     </tr>
     <tr>
       <td>21</td>
       <td>Step  5.1</td>
       <td>Preparacion de la tabla de emisiones</td>
-      <td>[190]</td>
+      <td>[191]</td>
     </tr>
     <tr>
       <td>22</td>
       <td>Step  5.2</td>
       <td>Se filtran los NTYP y se dejan los registros con la ultima fecha de emisión</td>
-      <td>[207]</td>
+      <td>[208]</td>
     </tr>
     <tr>
       <td>23</td>
       <td>LC</td>
       <td>Me lo comento Joa (esto se lo informo Dani Cano a ella)</td>
-      <td>[214]</td>
+      <td>[215]</td>
     </tr>
     <tr>
       <td>24</td>
       <td>LC</td>
       <td>Son los registros con última fecha de emisión</td>
-      <td>[215]</td>
+      <td>[216]</td>
     </tr>
     <tr>
       <td>25</td>
       <td>Step  5.3</td>
       <td>Join entre las polizas de HSBC - Certificados con Emisiones</td>
-      <td>[218]</td>
+      <td>[219]</td>
     </tr>
     <tr>
       <td>26</td>
       <td>LC</td>
       <td>Se crea un flg para identificar aquellas pólizas que no aparecen en "Certificados"</td>
-      <td>[226]</td>
+      <td>[227]</td>
     </tr>
     <tr>
       <td>27</td>
       <td>LC</td>
       <td>Se crea un flg para identificar aquellas pólizas que no tiene dato de premio/prima cargado en emmisiones</td>
-      <td>[227]</td>
+      <td>[228]</td>
     </tr>
     <tr>
       <td>28</td>
       <td>LC</td>
       <td>Identificamos aquellas solicitudes provenientes de campañas que no terminan en alta</td>
-      <td>[228]</td>
+      <td>[229]</td>
     </tr>
     <tr>
       <td>29</td>
       <td>Step  6</td>
       <td>Cruce con estrucutra de gestión para sumar descripciones de códigos</td>
-      <td>[234]</td>
+      <td>[235]</td>
     </tr>
     <tr>
       <td>30</td>
       <td>Step  7</td>
       <td>Se corrigue el campo punto_venta para que CVT figure como Telemarketing</td>
-      <td>[249]</td>
+      <td>[250]</td>
     </tr>
     <tr>
       <td>31</td>
       <td>Step  8</td>
       <td>Unificación con tabla presupuesto HSBC para sumar al final de la tabla los registros con los datos correspondientes al prespuesto por producto y punto de venta</td>
-      <td>[284]</td>
+      <td>[285]</td>
     </tr>
     <tr>
       <td>32</td>
       <td>Step  8</td>
       <td>Final Select</td>
-      <td>[333]</td>
+      <td>[334]</td>
     </tr>
   </tbody>
 </table>
