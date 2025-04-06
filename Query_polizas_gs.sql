@@ -34,7 +34,13 @@
 --Historical Versions:
 
 --2025/01/01: (Emiliano Rigueiro) created Query.
+--2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas.
+--2025/01/01: (Emiliano Rigueiro) created Query.
 --2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
+--2025/01/01: (Emiliano Rigueiro) created Query.
+--2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
+--2025/01/01: (Emiliano Rigueiro) created Query.
+--2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas.  
 ---------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------
 --Step 1: Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas--
@@ -331,5 +337,5 @@ FROM hive_metastore.default.hsbc_presupuestos
 )
  
 ---------------------------------------------------------------------------------------------------------------
---Step 8: Final Select-- 
+--Step 9: Final Select-- 
 SELECT * FROM tmp_12 
