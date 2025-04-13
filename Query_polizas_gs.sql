@@ -1,13 +1,18 @@
 
 --Summary:
 
-
 --Created Date: 2025-01-01
 
 --Description: Esta consulta contiene todas las altas generadas por Galicia +
 
 --References: for exaple Ticket Jira #1234
+---------------------------------------------------------------------------------------------------------------
+--Related Queries:
 
+--Query_polizas_gs.sql
+--Query_polizas_gs.sql  
+
+---------------------------------------------------------------------------------------------------------------
 --Sources:
           -- rod_bronze.engage.cust_gestiones
           -- prod_bronze.mktinfo.cotizacion_vt7
