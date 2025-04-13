@@ -7,7 +7,7 @@
 
 --References: for exaple Ticket Jira #1234
 ---------------------------------------------------------------------------------------------------------------
---Related Queries:
+--Related Programs:
 
 --Query_polizas_gs.sql
 --Query_polizas_gs.sql  
