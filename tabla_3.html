@@ -74,8 +74,9 @@
         </style>
     </head>
     <body>
-        <h2>Summary</h2>
         <pre class="summary"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #483e3e;'>Query Summary</h4>
+  <i class="fas fa-calendar-alt icono"></i> <b style="color: #483e3e;">Query Name:</b> Query_polizas_gs
+
   <i class="fas fa-calendar-alt icono"></i> <b style="color: #483e3e;">Created Date:</b> 2025 01 01
 
   <i class="fa-solid fa-pen-to-square icono"></i> <b style="color: #483e3e;">Description:</b> Esta consulta contiene todas las altas generadas por Galicia +
@@ -83,7 +84,7 @@
   <i class="fas fa-book icono"></i> <b style="color: #483e3e;">References:</b> for exaple Ticket Jira #1234
                                                                                                                
   </pre>
-         <pre class="summary"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Related Programs</h4>
+        <pre class="summary"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Related Programs</h4>
 <i class="fa fa-file-text icono"></i> Query_polizas_gs.sql
 <i class="fa fa-file-text icono"></i> Query_polizas_gs.sql
 
@@ -142,193 +143,193 @@
       <td class="Comment">1</td>
       <td class="Comment">Step  1</td>
       <td class="Comment">Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas</td>
-      <td class="Comment">[51]</td>
+      <td class="Comment">[53]</td>
     </tr>
     <tr>
       <td class="Comment">2</td>
       <td class="Comment">Line Comment</td>
       <td class="Comment">Se limitan las altas por id de estructura de gestion</td>
-      <td class="Comment">[72]</td>
+      <td class="Comment">[74]</td>
     </tr>
     <tr>
       <td class="Comment">3</td>
       <td class="Comment">Line Comment</td>
       <td class="Comment">Se limita el universo a la primera póliza (certificado)</td>
-      <td class="Comment">[73]</td>
+      <td class="Comment">[75]</td>
     </tr>
     <tr>
       <td class="Comment">4</td>
       <td class="Comment">Step  2</td>
       <td class="Comment">Proceso para obtener las altas de HSBC que se gestionana a travez de campañas</td>
-      <td class="Comment">[76]</td>
+      <td class="Comment">[78]</td>
     </tr>
     <tr>
       <td class="Comment">5</td>
       <td class="Comment">Step  2.1</td>
       <td class="Comment">Se genera una temporal con las solicitudes generadas en las campañas de HSBC</td>
-      <td class="Comment">[78]</td>
+      <td class="Comment">[80]</td>
     </tr>
     <tr>
       <td class="Comment">6</td>
       <td class="Comment">Line Comment</td>
       <td class="Comment">Se limita el universo solo a las campañas de HSBC</td>
-      <td class="Comment">[83]</td>
+      <td class="Comment">[85]</td>
     </tr>
     <tr>
       <td class="Comment">7</td>
       <td class="Comment">Line Comment</td>
       <td class="Comment">Trae solamente las gestiones de ventas</td>
-      <td class="Comment">[84]</td>
+      <td class="Comment">[86]</td>
     </tr>
     <tr>
       <td class="Comment">8</td>
       <td class="Comment">Step  2.2</td>
       <td class="Comment">Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza</td>
-      <td class="Comment">[87]</td>
+      <td class="Comment">[89]</td>
     </tr>
     <tr>
       <td>9</td>
       <td>Line Comment</td>
       <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[101, 139]</td>
+      <td>[103, 141]</td>
     </tr>
     <tr>
       <td>10</td>
       <td>Step  2.3</td>
       <td>Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol, id_producto, id_branch</td>
-      <td>[106]</td>
+      <td>[108]</td>
     </tr>
     <tr>
       <td>11</td>
       <td>Line Comment</td>
       <td>Generamos un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[120]</td>
+      <td>[122]</td>
     </tr>
     <tr>
       <td>12</td>
       <td>Step  2.4</td>
       <td>Se realiza un cruce con cotizaciones para traer los datos de id_canal y id_subcanal ya que en certificados esta incompleto</td>
-      <td>[125]</td>
+      <td>[127]</td>
     </tr>
     <tr>
       <td>13</td>
       <td>Line Comment</td>
       <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[101, 139]</td>
+      <td>[103, 141]</td>
     </tr>
     <tr>
       <td>14</td>
       <td>Step  3</td>
       <td>unificación entre pólizas provenientes de "estructura de gestion" y "campañias"</td>
-      <td>[145]</td>
+      <td>[147]</td>
     </tr>
     <tr>
       <td>15</td>
       <td>Step  4</td>
       <td>Cruce con certificados para sumar dimensiones</td>
-      <td>[156]</td>
+      <td>[158]</td>
     </tr>
     <tr>
       <td>16</td>
       <td>Step  4.1</td>
       <td>Preparacion de la tabla de certificados para dejar la última actualización de cada registro</td>
-      <td>[158]</td>
+      <td>[160]</td>
     </tr>
     <tr>
       <td>17</td>
       <td>Line Comment</td>
       <td>Se excluyen aquellas pólizas que fueron traspasos ya que no deben ser consideraras altas</td>
-      <td>[180]</td>
+      <td>[182]</td>
     </tr>
     <tr>
       <td>18</td>
       <td>Step  4.2</td>
       <td>Join entre las pólizas de HSBC y la tabla de certificados</td>
-      <td>[183]</td>
+      <td>[185]</td>
     </tr>
     <tr>
       <td>19</td>
       <td>Line Comment</td>
       <td>Se modifica el número de certif. para los productos SIP (Id_producto 5000), por que el premio se carga con número de certificado 1)</td>
-      <td>[188]</td>
+      <td>[190]</td>
     </tr>
     <tr>
       <td>20</td>
       <td>Step  5</td>
       <td>Cruce con emisones para traer el dato de premio</td>
-      <td>[200]</td>
+      <td>[202]</td>
     </tr>
     <tr>
       <td>21</td>
       <td>Step  5.1</td>
       <td>Preparacion de la tabla de emisiones</td>
-      <td>[202]</td>
+      <td>[204]</td>
     </tr>
     <tr>
       <td>22</td>
       <td>Step  5.2</td>
       <td>Se filtran los NTYP y se dejan los registros con la ultima fecha de emisión</td>
-      <td>[219]</td>
+      <td>[221]</td>
     </tr>
     <tr>
       <td>23</td>
       <td>Line Comment</td>
       <td>Me lo comento Joa (esto se lo informo Dani Cano a ella)</td>
-      <td>[226]</td>
+      <td>[228]</td>
     </tr>
     <tr>
       <td>24</td>
       <td>Line Comment</td>
       <td>Son los registros con última fecha de emisión</td>
-      <td>[227]</td>
+      <td>[229]</td>
     </tr>
     <tr>
       <td>25</td>
       <td>Step  5.3</td>
       <td>Join entre las polizas de HSBC - Certificados con Emisiones</td>
-      <td>[230]</td>
+      <td>[232]</td>
     </tr>
     <tr>
       <td>26</td>
       <td>Line Comment</td>
       <td>Se crea un flg para identificar aquellas pólizas que no aparecen en "Certificados"</td>
-      <td>[238]</td>
+      <td>[240]</td>
     </tr>
     <tr>
       <td>27</td>
       <td>Line Comment</td>
       <td>Se crea un flg para identificar aquellas pólizas que no tiene dato de premio/prima cargado en emmisiones</td>
-      <td>[239]</td>
+      <td>[241]</td>
     </tr>
     <tr>
       <td>28</td>
       <td>Line Comment</td>
       <td>Identificamos aquellas solicitudes provenientes de campañas que no terminan en alta</td>
-      <td>[240]</td>
+      <td>[242]</td>
     </tr>
     <tr>
       <td>29</td>
       <td>Step  6</td>
       <td>Cruce con estrucutra de gestión para sumar descripciones de códigos</td>
-      <td>[246]</td>
+      <td>[248]</td>
     </tr>
     <tr>
       <td>30</td>
       <td>Step  7</td>
       <td>Se corrigue el campo punto_venta para que CVT figure como Telemarketing</td>
-      <td>[261]</td>
+      <td>[263]</td>
     </tr>
     <tr>
       <td>31</td>
       <td>Step  8</td>
       <td>Unificación con tabla presupuesto HSBC para sumar al final de la tabla los registros con los datos correspondientes al prespuesto por producto y punto de venta</td>
-      <td>[296]</td>
+      <td>[298]</td>
     </tr>
     <tr>
       <td>32</td>
       <td>Step  9</td>
       <td>Final Select</td>
-      <td>[345]</td>
+      <td>[347]</td>
     </tr>
   </tbody>
 </table>
