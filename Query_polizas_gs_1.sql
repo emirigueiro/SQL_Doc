@@ -8,12 +8,15 @@
 --Description: Esta consulta contiene todas las altas generadas por Galicia +
 
 --References: for exaple Ticket Jira #1234
----------------------------------------------------------------------------------------------------------------
+
+--<
+--------------------------------------------------------------------------------------------------------------
 --Related Programs:
 
 --Query_polizas_gs.sql
 --Query_polizas_gs.sql  
 
+--<
 ---------------------------------------------------------------------------------------------------------------
 --Sources:
           -- rod_bronze.engage.cust_gestiones
@@ -22,6 +25,8 @@
           -- prod_bronze.vt7.qv_vt7_estructuragestion
           -- prod_gold_summarized.migs_upgraded.emision
           -- hive_metastore.default.hsbc_presupuestos  
+
+--<
 ---------------------------------------------------------------------------------------------------------------
 --Product 1: 
 
@@ -37,6 +42,8 @@
 --Name: hive_metastore.default.hsbc_altas
 --Type: Table
 --Process: Create or Replace
+
+--<
 ---------------------------------------------------------------------------------------------------------------
 --Historical Versions:
 
@@ -47,7 +54,9 @@
 --2025/01/01: (Emiliano Rigueiro) created Query.
 --2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
 --2025/01/01: (Emiliano Rigueiro) created Query.
---2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas.  
+--2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
+
+--<
 ---------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------
 --Step 1: Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas--
