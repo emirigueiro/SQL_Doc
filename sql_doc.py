@@ -1,12 +1,12 @@
-## Dependencies
+# Dependencies
 import pandas as pd
 import re
 from itertools import chain  
 
-## Read File:
-def read(x):
+# Read File
+def read_sql_file(sql_file: str) -> str:
     """
-    This function is responsible for reading the .SQL file and transforming it into an object,
+    This function is responsible for reading the .SQL file and return its content as a string,
     allowing the necessary transformations to be applied before generating the HTML file.
     
     Args:
@@ -20,20 +20,20 @@ def read(x):
         FileNotFoundError: If the file path is incorrect or does not exist.
         IOError: If there is an issue opening or reading the file.
     """
-    if not re.search(r'\.sql$', x, re.IGNORECASE):
+    if not re.search(r'\.sql$', sql_file, re.IGNORECASE):
         raise ValueError("Error: The file must have a .sql extension.")
 
     try:
-        with open(x, 'r', encoding='utf-8') as file:
-            sql_query = file.read()
-            return sql_query
+        with open(sql_file, 'r', encoding='utf-8') as file:
+            file = file.read()
+            return file
     except FileNotFoundError:
-        raise FileNotFoundError(f"Error: The file '{x}' was not found.")
+        raise FileNotFoundError(f"Error: The file '{sql_file}' was not found.")
     except IOError as e:
-        raise IOError(f"Error reading the file '{x}': {e}")
-
-## Summary:
-def summary(x):
+        raise IOError(f"Error reading the file '{sql_file}': {e}")     
+    
+# Summary 
+def summary(sql_file: str) -> str:
     """
     This function is responsible for extracting the "summary" section and applying the necessary transformations 
     to display it correctly in HTML format.
@@ -48,10 +48,10 @@ def summary(x):
     """
 
     # Defines a regular expression to find the general description of the query.
-    patron = r'--Summary:(.*?)Related Programs:'
+    patron = r'--Summary:(.*?)--<'
 
     # Finds all matches in the file content.
-    coincidencias = re.findall(patron, x, re.DOTALL)
+    coincidencias = re.findall(patron, sql_file, re.DOTALL)
 
     # Concatenates the matches into a single text string.
     summary_docs = '\n'.join(coincidencias).strip()
@@ -68,8 +68,8 @@ def summary(x):
 
     return summary_docs 
 
-## Related Programs:
-def related(x):
+# Related Programs
+def related(sql_file: str) -> str:
     """
     This function is responsible for extracting the "related" section and applying the necessary transformations 
     to display it correctly in HTML format.
@@ -84,10 +84,10 @@ def related(x):
     """ 
     
     # Defines a regular expression to find the related queries section.
-    patron = r'--Related Programs:(.*?)Sources:'
+    patron = r'--Related Programs:(.*?)--<'
 
     # Finds all matches in the file content.
-    coincidencias = re.findall(patron, x, re.DOTALL)
+    coincidencias = re.findall(patron, sql_file, re.DOTALL)
 
     # Concatenates the matches into a single text string.
     related_docs = '\n'.join(coincidencias).strip()
@@ -104,8 +104,8 @@ def related(x):
 
     return related_docs
 
-## Sources:
-def sources(x):
+# Source Transformation
+def sources(sql_file: str) -> str:
     """
     This function is responsible for extracting the "sources" section and applying the necessary transformations 
     to display it correctly in HTML format.
@@ -120,10 +120,10 @@ def sources(x):
     """
     
     # Defines a regular expression to find the general description of the query.
-    patron = r'--Sources:(.*?)Product 1:'
+    patron = r'--Sources:(.*?)--<'
 
     # Finds all matches in the file content.
-    coincidencias = re.findall(patron, x, re.DOTALL)
+    coincidencias = re.findall(patron, sql_file, re.DOTALL)
 
     # Concatenates the matches into a single text string.
     source_docs = '\n'.join(coincidencias).strip()
@@ -140,8 +140,8 @@ def sources(x):
 
     return source_docs
 
-## Products:
-def products(x):
+# Products Tranformation
+def products(sql_file: str) -> str:
     """
     This function is responsible for extracting "products" section and applying the necessary transformations 
     to display it correctly in HTML.
@@ -157,10 +157,10 @@ def products(x):
     """
     
     # Defines a regular expression to find the general description of the query.
-    patron = r'(Product.*?)(?=Historical Versions:)'
+    patron = r'(Product.*?)(?=--<)'
 
     # Finds all matches in the file content.
-    coincidencias = re.findall(patron, x, re.DOTALL)
+    coincidencias = re.findall(patron, sql_file, re.DOTALL)
 
     # Concatenates the matches into a single text string.
     products_docs = '\n'.join(coincidencias).strip()
@@ -181,8 +181,8 @@ def products(x):
 
     return products_docs
 
-##Historical Versions:
-def versions(x):
+# Versions Tranformation
+def versions(sql_file: str) -> str:
     """
     This function is responsible for extracting "versions" section and applying the necessary transformations 
     to display it correctly in HTML.
@@ -197,10 +197,10 @@ def versions(x):
     """
 
     # Defines a regular expression to find the general description of the query.
-    patron = r'--Historical Versions:(.*?)Step'
+    patron = r'--Historical Versions:(.*?)--<'
 
     # Finds all matches in the file content.
-    coincidencias = re.findall(patron, x, re.DOTALL)
+    coincidencias = re.findall(patron, sql_file, re.DOTALL)
 
     # Concatenates the matches into a single text string.
     versions_docs = '\n'.join(coincidencias).strip()
@@ -217,10 +217,10 @@ def versions(x):
     # Adds a title within versions_docs.
     versions_docs = f"<h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Historical Versions</h4>\n{versions_docs}"
 
-    return versions_docs
+    return versions_docs      
 
-## Comments:
-def comments(x):
+# Comments Transformation
+def comments(sql_file: str) -> str:
     """
     This function is responsible for extracting the summary section and applying the necessary transformations 
     to display it correctly in HTML.
@@ -239,7 +239,7 @@ def comments(x):
     patron = r'(Step|LC)(.*?)--'
 
     # Finds all matches in the file content.
-    coincidencias = re.findall(patron, x, re.DOTALL)
+    coincidencias = re.findall(patron, sql_file, re.DOTALL)
 
     # Saves the comments in a DataFrame and a list.
     list_documentation = []
@@ -278,7 +278,7 @@ def comments(x):
     line_number = []
 
     for elemento in df_documentation_html['Comment']:
-        line_number.append(line_count(elemento, x)) 
+        line_number.append(line_count(elemento, sql_file)) 
 
     line_number = list(chain(*line_number))
 
@@ -304,24 +304,24 @@ def comments(x):
 
     return comments_docs
 
-## HTML Creation:
-def html(summary_docs, related_docs, sources_docs, products_docs, versions_docs, comments_docs):
+# HTML Creation
+def html(summary_docs: str, related_docs: str, sources_docs: str, products_docs:str, versions_docs: str, comments_docs: str) -> str:
     """
     This function is responsible of create the html visaul style.
     
     Args:
-        summary_docs: html with this section.
-        related_docs: html with this section.
-        sources_docs: html with this section.
-        products_docs: html with this section.
-        versions_docs: html with this section.
-        comments_docs: html with this section.
+        summary_docs: str with this section.
+        related_docs: str with this section.
+        sources_docs: str with this section.
+        products_docs: str with this section.
+        versions_docs: str with this section. 
+        comments_docs: str with this section.
 
     
     Returns: html: HTML object containing the query documentation.   
     """
         
-   # Defines the complete HTML with CSS styles.
+# Defines the complete HTML with CSS styles.
     html_string = f"""
     <!DOCTYPE html>
     <html lang="es">
@@ -410,17 +410,3 @@ def html(summary_docs, related_docs, sources_docs, products_docs, versions_docs,
     """
 
     return html_string
-
-## Main Function:
-# This is the main function of the program, which orchestrates the execution of the different functions that generate each section of the documentation and returns them unified in a single HTML.
-def sql_doc(x):
-    sql_query = read(x)
-    summary_docs = summary(sql_query)
-    related_docs = related(sql_query)
-    source_docs = sources(sql_query) 
-    products_docs = products(sql_query)
-    versions_docs = versions(sql_query)
-    comments_docs = comments(sql_query)
-
-    sql_docs_html = html(summary_docs, related_docs, source_docs, products_docs, versions_docs, comments_docs)
-    return sql_docs_html
