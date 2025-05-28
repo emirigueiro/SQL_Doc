@@ -2,8 +2,11 @@
 --Summary:
 
 --Query Name: Query_polizas_gs
---Created Date: 2025-01-01
+
+--Created Date: 2025/01/01
+
 --Description: Esta consulta contiene todas las altas generadas por Galicia +
+
 --References: for exaple Ticket Jira #1234
 
 --<
