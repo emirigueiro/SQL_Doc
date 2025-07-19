@@ -40,7 +40,7 @@
             }
             .Clase {
                 min-width: 100px; /* Ajusta el ancho de la columna Ciudad */
-            }
+            } 
             .summary {
                 font-family: Arial, sans-serif;
                 font-size: 17px; /* Aumenta el tamaño de la letra */
@@ -87,47 +87,35 @@
             <img src="Pictures/Logo_SQL_Docs_Wide.png" alt="Logo">
         </div>
         <pre class="summary"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #483e3e;'>Query Summary</h4>
-  <i class="fa-solid fa-ticket icono"></i> <b style="color: #483e3e;">Query Name:</b> Query_polizas_gs
+  <i class="fas fa-calendar-alt icono"></i> <b style="color: #483e3e;">Created Date:</b> 2023/08/01
 
-  <i class="fas fa-calendar-alt icono"></i> <b style="color: #483e3e;">Created Date:</b> 2025/01/01
+  <i class="fa-solid fa-pen-to-square icono"></i> <b style="color: #483e3e;">Description:</b> Esta query realiza la medición de las altas de las campañas Out.
 
-  <i class="fa-solid fa-pen-to-square icono"></i> <b style="color: #483e3e;">Description:</b> Esta consulta contiene todas las altas generadas por Galicia +
-
-  <i class="fas fa-book icono"></i> <b style="color: #483e3e;">References:</b> for exaple Ticket Jira #1234</pre>
+  <i class="fas fa-book icono"></i> <b style="color: #483e3e;">References:</b> N/A</pre>
         <pre class="summary"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Related Programs</h4>
-<i class="fa fa-file-text icono"></i> Query_polizas_gs.sql
-<i class="fa fa-file-text icono"></i> Query_polizas_gs.sql</pre>
+<i class="fa fa-file-text icono"></i> Query:fct_performnace_campanas_out</pre>
         <pre class="source"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Sources</h4>
-<i class="fa fa-sign-out icono"></i> rod_bronze.engage.cust_gestiones
-<i class="fa fa-sign-out icono"></i> prod_bronze.mktinfo.cotizacion_vt7
-<i class="fa fa-sign-out icono"></i> prod_gold_summarized.migs_upgraded.certificados
-<i class="fa fa-sign-out icono"></i> prod_bronze.vt7.qv_vt7_estructuragestion
-<i class="fa fa-sign-out icono"></i> prod_gold_summarized.migs_upgraded.emision
-<i class="fa fa-sign-out icono"></i> hive_metastore.default.hsbc_presupuestos</pre>
+<i class="fa fa-sign-out icono"></i> `polaris.act_tb_campanas_ventas`
+<i class="fa fa-sign-out icono"></i> `polaris.act_tb_campanas`
+<i class="fa fa-sign-out icono"></i> `dwh.lkp_ramo`
+<i class="fa fa-sign-out icono"></i> `dwh.fct_poliza_altas_bajas`
+<i class="fa fa-sign-out icono"></i> `polaris.act_tb_proxima_interacciones`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.dwh.lkp_tipo_combustible`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_codigo_postales`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.dwh.lkp_cp_prov_zona`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.dwh.lkp_clientes`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.externo.act_perfo_campanas_grupos`</pre>
         <pre class="source"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Products</h4>
   <i class="fa-solid fa-box-archive icono_2"></i> <b style="color: #483e3e;"> Product </b> 1: 
 
-     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;"> Description:</b> tabla con toda las altas de Galicia +
-     <i class="fa-solid fa-angle-right icono"></i></i> <b style="color: #483e3e;"> Name:</b> hive_metastore.default.hsbc_altas
-     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Type:</b> Table
-     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Process:</b> Create or Replace
-
-                                                      
-  <i class="fa-solid fa-box-archive icono_2"></i> <b style="color: #483e3e;"> Product </b> 2:
-
-     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;"> Description:</b> tabla con toda las altas de Galicia +
-     <i class="fa-solid fa-angle-right icono"></i></i> <b style="color: #483e3e;"> Name:</b> hive_metastore.default.hsbc_altas
-     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Type:</b> Table
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;"> Description:</b> Esta tabla contiene todos las altas correspondientes a las campañas out.
+     <i class="fa-solid fa-angle-right icono"></i></i> <b style="color: #483e3e;"> Name:</b> `usr_rigueiro.fct_altas_campanas_out_test`
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Type:</b> Tabla final
      <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Process:</b> Create or Replace</pre>
         <pre class="source"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Historical Versions</h4>
-<i class="fa-solid fa-map-pin icono"></i>   2025/01/01: <span style="color: #c9820d;">(Emiliano Rigueiro)</span> created Query.
-<i class="fa-solid fa-map-pin icono"></i>   2025/02/01: <span style="color: #c9820d;">(Emiliano Rigueiro)</span> se elimino una de los ids considerados para las campañas.
-<i class="fa-solid fa-map-pin icono"></i>   2025/01/01: <span style="color: #c9820d;">(Emiliano Rigueiro)</span> created Query.
-<i class="fa-solid fa-map-pin icono"></i>   2025/02/01: <span style="color: #c9820d;">(Emiliano Rigueiro)</span> se elimino una de los ids considerados para las campañas. 
-<i class="fa-solid fa-map-pin icono"></i>   2025/01/01: <span style="color: #c9820d;">(Emiliano Rigueiro)</span> created Query.
-<i class="fa-solid fa-map-pin icono"></i>   2025/02/01: <span style="color: #c9820d;">(Emiliano Rigueiro)</span> se elimino una de los ids considerados para las campañas. 
-<i class="fa-solid fa-map-pin icono"></i>   2025/01/01: <span style="color: #c9820d;">(Emiliano Rigueiro)</span> created Query.
-<i class="fa-solid fa-map-pin icono"></i>   2025/02/01: <span style="color: #c9820d;">(Emiliano Rigueiro)</span> se elimino una de los ids considerados para las campañas.</pre>
+<i class="fa-solid fa-map-pin icono"></i>   23/04/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se incorpora la tabla dimensionales alimentada por el negocio con los nuevos grupos de campañas bajo el campo "grupo_corregido_camp".
+<i class="fa-solid fa-map-pin icono"></i>   28/05/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se modifica el nombre del campo num_secu_pol por id_pol. Se reemplazan los Null por 0 en el campo flg_0km.
+<i class="fa-solid fa-map-pin icono"></i>   14/07/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se incluyen los campos de num_pol, num_pol_ori y num_ries provenientes de la tabla de altas_bajas.</pre>
         <h2>Process Comments</h2>
         <table border="1" class="dataframe">
   <thead>
@@ -142,194 +130,350 @@
     <tr>
       <td class="Comment">1</td>
       <td class="Comment">Step  1</td>
-      <td class="Comment">Se obtienen todas las talta de HSBC a excepción de las que provienen de campañas</td>
-      <td class="Comment">[62]</td>
+      <td class="Comment">Construcción de las altas provenientes de las Campañas Web y con grupo Null</td>
+      <td class="Comment">[[50]]</td>
     </tr>
     <tr>
       <td class="Comment">2</td>
-      <td class="Comment">Line Comment</td>
-      <td class="Comment">Se limitan las altas por id de estructura de gestion</td>
-      <td class="Comment">[83]</td>
+      <td class="Comment">Step  1.2</td>
+      <td class="Comment">Se recorta la LKP ramos previo a su unificación</td>
+      <td class="Comment">[[83]]</td>
     </tr>
     <tr>
       <td class="Comment">3</td>
-      <td class="Comment">Line Comment</td>
-      <td class="Comment">Se limita el universo a la primera póliza (certificado)</td>
-      <td class="Comment">[84]</td>
+      <td class="Comment">Step  1.3</td>
+      <td class="Comment">Se realiza la unificación entre la tabla de ventas de campañas - tb_campañas y la lKP de ramos</td>
+      <td class="Comment">[[94]]</td>
     </tr>
     <tr>
       <td class="Comment">4</td>
-      <td class="Comment">Step  2</td>
-      <td class="Comment">Proceso para obtener las altas de HSBC que se gestionana a travez de campañas</td>
-      <td class="Comment">[87]</td>
+      <td class="Comment">Line Comment</td>
+      <td class="Comment">Se limita el universo solo a los tipos de operador INTE y CSOC ya que son los únicos 2 tipos que trabajan las campañas Web</td>
+      <td class="Comment">[[104]]</td>
     </tr>
     <tr>
       <td class="Comment">5</td>
-      <td class="Comment">Step  2.1</td>
-      <td class="Comment">Se genera una temporal con las solicitudes generadas en las campañas de HSBC</td>
-      <td class="Comment">[89]</td>
+      <td class="Comment">Line Comment</td>
+      <td class="Comment">Se filtran las fechas de altas, para que siempre sean posteriores a las fechas de inserción</td>
+      <td class="Comment">[[106]]</td>
     </tr>
     <tr>
       <td class="Comment">6</td>
-      <td class="Comment">Line Comment</td>
-      <td class="Comment">Se limita el universo solo a las campañas de HSBC</td>
-      <td class="Comment">[94]</td>
+      <td class="Comment">Step  1.4</td>
+      <td class="Comment">Se crea el flg_alta para identificar las altas en funcion de la combinación del tipo de operador y el grupo al que pertenece la campaña</td>
+      <td class="Comment">[[109]]</td>
     </tr>
     <tr>
       <td class="Comment">7</td>
       <td class="Comment">Line Comment</td>
-      <td class="Comment">Trae solamente las gestiones de ventas</td>
-      <td class="Comment">[95]</td>
+      <td class="Comment">Se crea el flg_alta para los grupos de campañas</td>
+      <td class="Comment">[[131]]</td>
     </tr>
     <tr>
       <td class="Comment">8</td>
+      <td class="Comment">Step  1.5</td>
+      <td class="Comment">Se excluyen las altas de financiado del proceso, para calcularlas aparte con otros criterios posteriormente (las altas que estan en ventas - campanas estan mal asignadas, por que quedan muchas en CTB)</td>
+      <td class="Comment">[[139]]</td>
+    </tr>
+    <tr>
+      <td class="Comment">9</td>
+      <td class="Comment">Step  2</td>
+      <td class="Comment">Construcción de las altas provenientes de las Campañas de Post Financiado</td>
+      <td class="Comment">[[180]]</td>
+    </tr>
+    <tr>
+      <td class="Comment">10</td>
+      <td class="Comment">Step  2.1</td>
+      <td class="Comment">Se toman solamente las altas realizadas por el código de agencia 5779</td>
+      <td class="Comment">[[181]]</td>
+    </tr>
+    <tr>
+      <td class="Comment">11</td>
+      <td class="Comment">Line Comment</td>
+      <td class="Comment">Se limita el universo de las pólizas con alta a aquellas generadas solamente por el código de agencia gestionadora 5779</td>
+      <td class="Comment">[[198]]</td>
+    </tr>
+    <tr>
+      <td class="Comment">12</td>
       <td class="Comment">Step  2.2</td>
-      <td class="Comment">Cruce con cotizaciones para obtener detalles de la solicitud convertida en póliza</td>
-      <td class="Comment">[98]</td>
+      <td class="Comment">Se realiza el cruce entre las altas de  cod agencia 5779 y la tb_campañas para traer las dimensiones de las campañas</td>
+      <td class="Comment">[[202]]</td>
     </tr>
     <tr>
-      <td>9</td>
-      <td>Line Comment</td>
-      <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[112, 150]</td>
+      <td class="Comment">13</td>
+      <td class="Comment">Line Comment</td>
+      <td class="Comment">se eliminan las altas de click to buy ya que no queremos que queden altas asociadas a estas campañas</td>
+      <td class="Comment">[[229]]</td>
     </tr>
     <tr>
-      <td>10</td>
-      <td>Step  2.3</td>
-      <td>Se realiza el cruce con certificados utilizando num_solicitud de campañas y NPOLICY de Certificados para traer las dimensiones de ncertipol, id_producto, id_branch</td>
-      <td>[117]</td>
+      <td class="Comment">14</td>
+      <td class="Comment">Step  2.3</td>
+      <td class="Comment">Se realiza la unificación entre las altas y los registros segmentados en las campañas de Post Financiado utilizado el cif_id (esto es critico, ya que al poder estar un registro insertado en mas de una campaña, si se hace el join directamente con la tabla de altas se terminan asociando las altas a campañas que no corresponden)</td>
+      <td class="Comment">[[232]]</td>
     </tr>
     <tr>
-      <td>11</td>
-      <td>Line Comment</td>
-      <td>Generamos un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[131]</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>Step  2.4</td>
-      <td>Se realiza un cruce con cotizaciones para traer los datos de id_canal y id_subcanal ya que en certificados esta incompleto</td>
-      <td>[136]</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>Line Comment</td>
-      <td>Generarmo un flg para identifiar aquellas pólizas provenientes de campañas</td>
-      <td>[112, 150]</td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td>Step  3</td>
-      <td>unificación entre pólizas provenientes de "estructura de gestion" y "campañias"</td>
-      <td>[156]</td>
-    </tr>
-    <tr>
-      <td>15</td>
-      <td>Step  4</td>
-      <td>Cruce con certificados para sumar dimensiones</td>
-      <td>[167]</td>
+      <td class="Comment">15</td>
+      <td class="Comment">Step  2.4</td>
+      <td>Se contruye el flg_alta_financiado el cual tiene en cuenta una ventana de 90 días de gracia desde que se inserta el registro para considerar un alta posterior como generada por la campaña</td>
+      <td>[[242]]</td>
     </tr>
     <tr>
       <td>16</td>
-      <td>Step  4.1</td>
-      <td>Preparacion de la tabla de certificados para dejar la última actualización de cada registro</td>
-      <td>[169]</td>
+      <td>Step  2.5</td>
+      <td>Limitamos el universo de la tabla temporal solo a las altas de campañas de Post Financiado</td>
+      <td>[[256]]</td>
     </tr>
     <tr>
       <td>17</td>
       <td>Line Comment</td>
-      <td>Se excluyen aquellas pólizas que fueron traspasos ya que no deben ser consideraras altas</td>
-      <td>[191]</td>
+      <td>Se limitan el universo a las altas de los insertados del mismo mes</td>
+      <td>[[263]]</td>
     </tr>
     <tr>
       <td>18</td>
-      <td>Step  4.2</td>
-      <td>Join entre las pólizas de HSBC y la tabla de certificados</td>
-      <td>[194]</td>
+      <td>Step  2.6</td>
+      <td>Se agregan campos adicionales relativos a la venta</td>
+      <td>[[266]]</td>
     </tr>
     <tr>
       <td>19</td>
       <td>Line Comment</td>
-      <td>Se modifica el número de certif. para los productos SIP (Id_producto 5000), por que el premio se carga con número de certificado 1)</td>
-      <td>[199]</td>
+      <td>Para realizar el join entre el proceso que construimos y campanas_ventas utilizamos el num_secu_pol\n)\n\n</td>
+      <td>[[]]</td>
     </tr>
     <tr>
       <td>20</td>
-      <td>Step  5</td>
-      <td>Cruce con emisones para traer el dato de premio</td>
-      <td>[211]</td>
+      <td>Step  2.7</td>
+      <td>Se limita el universo a codigo de compañia 1</td>
+      <td>[[290]]</td>
     </tr>
     <tr>
       <td>21</td>
-      <td>Step  5.1</td>
-      <td>Preparacion de la tabla de emisiones</td>
-      <td>[213]</td>
+      <td>Step  2.8</td>
+      <td>Se filtran las altas del operador Internet</td>
+      <td>[[325]]</td>
     </tr>
     <tr>
       <td>22</td>
-      <td>Step  5.2</td>
-      <td>Se filtran los NTYP y se dejan los registros con la ultima fecha de emisión</td>
-      <td>[230]</td>
+      <td>Line Comment</td>
+      <td>Se filtran duplicados, producto de la relación insertados - altas</td>
+      <td>[[332]]</td>
     </tr>
     <tr>
       <td>23</td>
-      <td>Line Comment</td>
-      <td>Me lo comento Joa (esto se lo informo Dani Cano a ella)</td>
-      <td>[237]</td>
+      <td>Step  3</td>
+      <td>Construcción de las altas provenientes de las Campañas de Falta de Pago</td>
+      <td>[[339, 496]]</td>
     </tr>
     <tr>
       <td>24</td>
-      <td>Line Comment</td>
-      <td>Son los registros con última fecha de emisión</td>
-      <td>[238]</td>
+      <td>Step  3.1</td>
+      <td>Se seleccionan las altas provenienties del codigo de agencia gestionadora 5775</td>
+      <td>[[340]]</td>
     </tr>
     <tr>
       <td>25</td>
-      <td>Step  5.3</td>
-      <td>Join entre las polizas de HSBC - Certificados con Emisiones</td>
-      <td>[241]</td>
+      <td>Step  3.2</td>
+      <td>Se unifican los registros segmentados en campaña con las dimensiones propias de cada campaña</td>
+      <td>[[361]]</td>
     </tr>
     <tr>
       <td>26</td>
-      <td>Line Comment</td>
-      <td>Se crea un flg para identificar aquellas pólizas que no aparecen en "Certificados"</td>
-      <td>[249]</td>
+      <td>Step  3.4</td>
+      <td>Se unifican las altas de la agencia gestionadora 5775 con los segmentados en campaña utilizando el cif_id</td>
+      <td>[[388]]</td>
     </tr>
     <tr>
       <td>27</td>
-      <td>Line Comment</td>
-      <td>Se crea un flg para identificar aquellas pólizas que no tiene dato de premio/prima cargado en emmisiones</td>
-      <td>[250]</td>
+      <td>Step  3.5</td>
+      <td>Se construye el flg_alta_faltpago tomando como condiciín una ventana de tiempo de 90 días desde la inserción y validando que la fecha de alta siempre sea igual o posterior a la de segmentación</td>
+      <td>[[398]]</td>
     </tr>
     <tr>
       <td>28</td>
       <td>Line Comment</td>
-      <td>Identificamos aquellas solicitudes provenientes de campañas que no terminan en alta</td>
-      <td>[251]</td>
+      <td>Limitamos el universo a las altas de los insertados del mismo mes</td>
+      <td>[[420, 580]]</td>
     </tr>
     <tr>
       <td>29</td>
-      <td>Step  6</td>
-      <td>Cruce con estrucutra de gestión para sumar descripciones de códigos</td>
-      <td>[257]</td>
+      <td>Line Comment</td>
+      <td>Se seleccionan los campos necesarios de la tabla campanas_ventas (operador, supervisor y prima)</td>
+      <td>[[432, 592]]</td>
     </tr>
     <tr>
       <td>30</td>
-      <td>Step  7</td>
-      <td>Se corrigue el campo punto_venta para que CVT figure como Telemarketing</td>
-      <td>[272]</td>
+      <td>Line Comment</td>
+      <td>Para realizar el join entre el proceso que construimos y campanas_ventas utilizamos el num_secu_pol</td>
+      <td>[[287, 445]]</td>
     </tr>
     <tr>
       <td>31</td>
-      <td>Step  8</td>
-      <td>Unificación con tabla presupuesto HSBC para sumar al final de la tabla los registros con los datos correspondientes al prespuesto por producto y punto de venta</td>
-      <td>[307]</td>
+      <td>Line Comment</td>
+      <td>Nos quedamos solo con los ramos de cia 1 para evitar duplicados</td>
+      <td>[[480, 646, 805]]</td>
     </tr>
     <tr>
       <td>32</td>
+      <td>Step  4</td>
+      <td>Construcción de las altas provenientes de las Campañas de Falta de Pago de Sucursales</td>
+      <td>[[496]]</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>Line Comment</td>
+      <td>Se unifica la tabla de altas con la de prox_inte - campañas</td>
+      <td>[[556, 722]]</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>Line Comment</td>
+      <td>Condición para que contar solamente las altas de los insertados hasta 60 días dsp de la inserción. Se llevo a 60 días a pedido de G.Etichichurry</td>
+      <td>[[565]]</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>Line Comment</td>
+      <td>Condición para que no existan altas con fecha anterior a la de inserción</td>
+      <td>[[571, 738]]</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>Line Comment</td>
+      <td>Limitamos el universo a las altas de los insertados del mismo mes</td>
+      <td>[[420, 580]]</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>Line Comment</td>
+      <td>Se seleccionan los campos necesarios de la tabla campanas_ventas (operador, supervisor y prima)</td>
+      <td>[[432, 592]]</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>Line Comment</td>
+      <td>Solo algunos operador realizan esta campañas, por eso los harcodeamos. No existe otra manera de identificarlos</td>
+      <td>[[601]]</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>Line Comment</td>
+      <td>Nos quedamos solo con los ramos de cia 1 para evitar duplicados</td>
+      <td>[[480, 646, 805]]</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>Line Comment</td>
+      <td>Se útiliza para eliminar duplicados, producto de la relación insertados - altas</td>
+      <td>[[655, 815]]</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>Step  5</td>
+      <td>Proceso para el calculo de las altas de campanas de Sucusales</td>
+      <td>[[662]]</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>Line Comment</td>
+      <td>Limitamos el universo de las altas solamente a las de sucursal ya que las altas de las campañas de Beta solo las realizan las sucursales</td>
+      <td>[[682]]</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>Line Comment</td>
+      <td>Se filtra previamente el grupo de campañas de beta para que cuando se realice el join con las altas, estas últimas solo se asignen a las campañas de financiado (esto es critico, ya que al poder estar un registro insertado en mas de una campaña, si se hace el join directamente con la tabla de altas se terminan asociando las altas a campañas que no corresponden.ESTA PARTE ESTA HARDCODEADA POR QUE EL GRUPO "BETA" ESTA MAL)</td>
+      <td>[[711]]</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>Line Comment</td>
+      <td>Condición para que las altas se correspondan a insertados del mismo mes</td>
+      <td>[[734]]</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>Line Comment</td>
+      <td>Condición para que no existan altas con fecha anterior a la de inserción</td>
+      <td>[[571, 738]]</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>Step  6</td>
+      <td>Se unifican los resultados de todos los procesos, para contar con una unica tabla que contenga todas las altas de campanas</td>
+      <td>[[822]]</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>Line Comment</td>
+      <td>Altas de campañas Web y Null</td>
+      <td>[[850]]</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>Line Comment</td>
+      <td>Altas de campañas Post Financiado</td>
+      <td>[[878]]</td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>Line Comment</td>
+      <td>Altas de campañas Falta de Pago</td>
+      <td>[[906, 934]]</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>Line Comment</td>
+      <td>Altas de campañas Falta de Pago</td>
+      <td>[[906, 934]]</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>Line Comment</td>
+      <td>Altas de campañas Beta</td>
+      <td>[[962]]</td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>Step  7</td>
+      <td>Proceso para agregar el dato de CIF_ID a cada póliza, Se filtran aquellos null que no se logran encontrar</td>
+      <td>[[966]]</td>
+    </tr>
+    <tr>
+      <td>53</td>
+      <td>Step  8</td>
+      <td>Proceso para sumar detalles del vehiculo asegurado</td>
+      <td>[[985]]</td>
+    </tr>
+    <tr>
+      <td>54</td>
       <td>Step  9</td>
-      <td>Final Select</td>
-      <td>[356]</td>
+      <td>Proceso para preapara la tabla de clientes previo al cruce con altas. Esto se realiza por que la tabla de clientes cuenta con duplicados y la trabajamos para quedarno con el dato más actualizado de cada registro</td>
+      <td>[[1013]]</td>
+    </tr>
+    <tr>
+      <td>55</td>
+      <td>Step  9.1</td>
+      <td>Unificación de la tabla de Clientes con la de Performance para traer el dato de segmento</td>
+      <td>[[1025]]</td>
+    </tr>
+    <tr>
+      <td>56</td>
+      <td>Step  10</td>
+      <td>Proceso para agregar el campo de grupo campañas corregido. Esta nueva agrupación la define el negocio en una tabla dimensional externa</td>
+      <td>[[1035]]</td>
+    </tr>
+    <tr>
+      <td>57</td>
+      <td>Line Comment</td>
+      <td>Filtramos la última fecha lote para quedarnos con la version mas actualizada de los nuevos grupos definidos por el negocio</td>
+      <td>[[1057]]</td>
+    </tr>
+    <tr>
+      <td>58</td>
+      <td>Step  10.1</td>
+      <td>Se realiza la unificación con performance para agregar el campo grupo_corregido_camp</td>
+      <td>[[1061]]</td>
     </tr>
   </tbody>
 </table>

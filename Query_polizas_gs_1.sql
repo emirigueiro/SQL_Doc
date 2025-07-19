@@ -47,14 +47,14 @@
 ---------------------------------------------------------------------------------------------------------------
 --Historical Versions:
 
---2025/01/01: (Emiliano Rigueiro) created Query.
---2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas.
---2025/01/01: (Emiliano Rigueiro) created Query.
---2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
---2025/01/01: (Emiliano Rigueiro) created Query.
---2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
---2025/01/01: (Emiliano Rigueiro) created Query.
---2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
+-- 2025/01/01: (Emiliano Rigueiro) created Query.
+-- 2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas.
+-- 2025/01/01: (Emiliano Rigueiro) created Query.
+-- 2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
+-- 2025/01/01: (Emiliano Rigueiro) created Query.
+-- 2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
+-- 2025/01/01: (Emiliano Rigueiro) created Query.
+-- 2025/02/01: (Emiliano Rigueiro) se elimino una de los ids considerados para las campañas. 
 
 --<
 ---------------------------------------------------------------------------------------------------------------
