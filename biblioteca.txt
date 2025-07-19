@@ -1,0 +1,81 @@
+Do you have your own python libraries running locally and would you like to publish them? Then the following guide will help you.
+
+A few months ago I started developing my own library with the goal that my team could use it. This idea led me to have to make it public and now I share with the entire community a detailed guide on how to do it.
+
+Ok, here we go!
+
+The process consists on 4 steps:
+
+Environment
+File structure
+Packaging
+Publication
+
+1. Envioramente:
+The first step is to verify that we have the latest version of pip installed. For those who don’t know, pip is the python package manager. It allows us to install and manage different “packages” or in other words sets of files.
+
+To make sure we have the latest version of pip we open the terminal and run:
+
+pip install – upgrade pip
+The second step is to install the twine library, for which we will use open the terminal and run the command:
+
+pip install twine
+2. Files estructure:
+The second step is to create the necessary file structure so that you can then package it.
+
+
+This is the structure that our library should contain.
+
+We start with a folder that will bear the name of our library.
+This folder will contain:
+
+a) setup.py file: this file should be called setup.py and should contain the following code:
+
+import pathlib
+from setuptools import find_packages, setup
+
+HERE = pathlib.Path(__file__).parent
+
+VERSION = '0.0.1' #Muy importante, deberéis ir cambiando la versión de vuestra librería según incluyáis nuevas funcionalidades
+PACKAGE_NAME = 'Leer_PDF' #Debe coincidir con el nombre de la carpeta 
+AUTHOR = 'Antonio Fernandez Troyano' #Modificar con vuestros datos
+AUTHOR_EMAIL = 'a.fernandez.troyano@gmail.com' #Modificar con vuestros datos
+URL = 'https://github.com/afernandez119' #Modificar con vuestros datos
+
+LICENSE = 'MIT' #Tipo de licencia
+DESCRIPTION = 'Librería para leer ficheros PDFs y extraer la información en formato str' #Descripción corta
+LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8') #Referencia al documento README con una descripción más elaborada
+LONG_DESC_TYPE = "text/markdown"
+
+
+#Paquetes necesarios para que funcione la libreía. Se instalarán a la vez si no lo tuvieras ya instalado
+INSTALL_REQUIRES = [
+      'pymupdf'
+      ]
+
+setup(
+    name=PACKAGE_NAME,
+    version=VERSION,
+    description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type=LONG_DESC_TYPE,
+    author=AUTHOR,
+    author_email=AUTHOR_EMAIL,
+    url=URL,
+    install_requires=INSTALL_REQUIRES,
+    license=LICENSE,
+    packages=find_packages(),
+    include_package_data=True
+)
+Although the code seems complex at first glance, you only have to pay attention to 3 parts:
+
+Version: it is the version of our library, if it is the first time we publish it it could be, for example, 1.0.0. If we are going to publish an update, 1.0.1 would follow.
+package_name: is the name of the library and must match the name of the second folder. It should also not be in use.
+install_requires: libraries necessary for your library to work (dependencies)
+
+b) Readme.md: this file should contain the description of your library, for example what it can be used for, what the main functions are, usage examples, etc.
+c) Folder with the name of the library: this folder must have the exact name of the library and it is the same name that should be in the package_name field of the setup.py file
+
+d) Inside the folder in point c) there must be at least 2 files:
+d.1) __init__.py: in this file we are only going to define the way to invoke our library: from .nueva_libreria import funcion_1
+d.2) .py: with the code of our library. The library can be made up of multiple files, in which case all of them must be placed within this folder.
