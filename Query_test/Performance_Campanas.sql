@@ -104,13 +104,13 @@ LEFT JOIN `prd-analytics-bq-prd-ed5b.polaris.act_tb_campanas` AS tb_campanas on 
 
 SELECT *,
 
-CASE --LC: Se unifican cif_id y referido_id en un nuevo campo "id_insertados". En caso que el cif_id este vacio le pega el referido_id--
+CASE --NT: Se unifican cif_id y referido_id en un nuevo campo "id_insertados". En caso que el cif_id este vacio le pega el referido_id--
   WHEN id_cliente is null
   THEN id_referido
   ELSE id_cliente
 END as id_insertados,
 
-CASE --LC: Se crea el flg_campana_activa. Marca como activas a aquellas campañas que tienen fecha de vencimiento mayor a la del día de consulta (1 = activa)--
+CASE --NT: Se crea el flg_campana_activa. Marca como activas a aquellas campañas que tienen fecha de vencimiento mayor a la del día de consulta (1 = activa)--
  WHEN DATE(fec_vencimiento) > ('2024-01-01')
  THEN 1
  ELSE 0
@@ -122,7 +122,7 @@ CASE
  ELSE 1
 END AS const_disponibilizado, 
 
-CASE --LC: Se marrcan las campañas que se segmentan en SalesForce. Toma las campañas que comienzan en su descricpión con SF (1 = esta en SalesForce)--
+CASE --NT: Se marrcan las campañas que se segmentan en SalesForce. Toma las campañas que comienzan en su descricpión con SF (1 = esta en SalesForce)--
  WHEN desc_camp LIKE 'SF%'
   THEN 1
   ELSE 0
@@ -142,7 +142,7 @@ END AS flg_habilitada_genesyscloud,
 
 FROM insertados_campanas
 
-WHERE DATE(insertados_campanas.fec_insercion) between  date_add(DATE_TRUNC(date('2024-01-01'), year), interval -1 year) AND date('2025-05-21') #   - fecha_proceso_desde '2023-01-01'  - fecha_proceso_hasta current_date-1 --LC: Se define la ventana de tiempo sobre la cual se van a tomar los inesrtados de campañas y posteriormente se va a correr el proceso de construccion de los indicadores--
+WHERE DATE(insertados_campanas.fec_insercion) between  date_add(DATE_TRUNC(date('2024-01-01'), year), interval -1 year) AND date('2025-05-21') #   - fecha_proceso_desde '2023-01-01'  - fecha_proceso_hasta current_date-1 --NT: Se define la ventana de tiempo sobre la cual se van a tomar los inesrtados de campañas y posteriormente se va a correr el proceso de construccion de los indicadores--
 );
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------- 
@@ -158,7 +158,7 @@ SELECT  intera_id,
                 
 FROM `prd-analytics-bq-prd-ed5b.polaris.act_tb_detalle_interacciones` 
 
---LC: Limitamos el universo solo a las gestiones utilizadas para el calculo de los indicadores provenientes de la tabla detalle interaccones (esto se realiza para recortar el universo de la tabla de detalle interacciones y mejorar la performance de la query)--
+--NT: Limitamos el universo solo a las gestiones utilizadas para el calculo de los indicadores provenientes de la tabla detalle interaccones (esto se realiza para recortar el universo de la tabla de detalle interacciones y mejorar la performance de la query)--
 WHERE gestion in ('OFE','VTA','M404','M439','M181','M185','M418','M063','M459','M186','M415','M416','OCPW','OOFA','M180','M460','M505','NAMS','M528','M060','M062','VLL','NCAU','NCCA','SU06','M556','M178','M179','N/C','M403','OC53','OC48','OCIC',
                  'NTTE','OCOM','OCEF','M479','OC32','OCMC','OC46','OA14','OC31','OE12','OC33','M229','OC35','OC44','ACSY','ACRC','NCNC','NCLL','M526','M061','OCU','NTIA','AAIF','AUS','NCTI','EQUI','NAMC','NAVC','ONCV','M065','M064','VTAB','M066',
                  'M531','M532','M533','M534','M537','M535','M536','M271','M541') 
@@ -212,13 +212,13 @@ LEFT JOIN `prd-analytics-bq-prd-ed5b.polaris.act_tb_campanas` AS camp ON camp.id
 (
 SELECT tmp_2.*,
 
-CASE --LC: Se reemplaza la gestion de detalle_inte por la de interacciones cuando la de detalle esta en null. (La que manda es la gestion de detalle, si esta viene vacia entonces toma la de interacciones)--
+CASE --NT: Se reemplaza la gestion de detalle_inte por la de interacciones cuando la de detalle esta en null. (La que manda es la gestion de detalle, si esta viene vacia entonces toma la de interacciones)--
  WHEN (gestion_detl_inte is not null) 
  THEN  gestion_detl_inte
  ELSE  gestion_interacciones
 END AS gest_unificada,
 
-CASE --LC: Se reemplaza el campo fecha_barrido_detalle por el de interacciones cuando la de detalle esta en null. (La que manda es la gestion de detalle, si esta viene vacia entonces toma la de interacciones)--
+CASE --NT: Se reemplaza el campo fecha_barrido_detalle por el de interacciones cuando la de detalle esta en null. (La que manda es la gestion de detalle, si esta viene vacia entonces toma la de interacciones)--
  WHEN (intera_id is not null AND inte_detl_id is null) 
  THEN fecha_barrido
  ELSE fecha_barrido_detl
@@ -287,7 +287,7 @@ FROM tmp_3 LEFT JOIN `prd-analytics-bq-prd-ed5b.polaris.act_tb_gestiones` AS ges
 (
 SELECT *,
 
-CASE --LC: flg_barrido - Marca todos los registros que son barridos, puede ser por un operador humano o una maquina-- 
+CASE --NT: flg_barrido - Marca todos los registros que son barridos, puede ser por un operador humano o una maquina-- 
   -- Grupo: WEB, TMK, FALTA DE PAGO y CONSUMO MASIVO: 
   WHEN ((tipo_operador in ('INTE','CSOC','SUCU') AND cod_gestion in ('OFE','VTA','M404','M439','M181','M185','M418','M063','M459','M186','M415','M416','OCPW','OOFA','M180','M460','M505','NAMS','M528','M060','M062','VLL','NCAU','NCCA','SU06','M556'))
   or (tipo_operador in ('INTE','CSOC','SUCU','IVR') AND cod_gestion in ('M178','M179','N/C')) AND (grupo_campana in ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','CONSUMO MASIVO','OTROS TMK') or grupo_campana is null))
@@ -309,7 +309,7 @@ CASE --LC: flg_barrido - Marca todos los registros que son barridos, puede ser p
   ELSE 0
 END AS flg_barrido,
 
-CASE --LC: flg_barrido_humano - Marca los registros que son barridos por un operador humano--
+CASE --NT: flg_barrido_humano - Marca los registros que son barridos por un operador humano--
    -- Grupo: WEB, TMK, FALTA DE PAGO y CONSUMO MASIVO:  
   WHEN (tipo_operador in ('INTE','CSOC','SUCU','IVR','ACC') AND cod_gestion in ('OFE','VTA','M404','M178','M439','M181','M185','M418','M179','M063','M459','M186','M415','M416','OCPW','OOFA','M180','M460','M505','NAMS','NAMS','M528','M060','M062','VLL','NCAU','NCCA','SU06','M556') AND (grupo_campana in ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','CONSUMO MASIVO','OTROS TMK') or grupo_campana is null))
   or (tipo_operador in ('CS') AND cod_gestion in ('M403','OC53','OC48','OCIC','NTTE','OCOM','OCEF','M479') AND grupo_campana in ('CONSUMO MASIVO'))
@@ -330,7 +330,7 @@ CASE --LC: flg_barrido_humano - Marca los registros que son barridos por un oper
   ELSE 0
 END AS flg_barrido_humano,
 
-CASE --LC: flg_barrido_automaico - Marca los registros que son barridos por el llamador automático--
+CASE --NT: flg_barrido_automaico - Marca los registros que son barridos por el llamador automático--
   -- Grupo: WEB, TMK, FALTA DE PAGO y CONSUMO MASIVO:  
   WHEN (tipo_operador in ('IVR') AND cod_gestion in ('N/C') AND (grupo_campana in ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','OTROS TMK') or grupo_campana is null)) 
   -- Grupo: COBRANZAS y RETENCION::
@@ -343,7 +343,7 @@ CASE --LC: flg_barrido_automaico - Marca los registros que son barridos por el l
   ELSE 0
 END AS flg_barrido_automatico,
 
-CASE --LC: flg_contactado - Marca los registros que fueron barridos y tuvieron algun tipo de contacto-- 
+CASE --NT: flg_contactado - Marca los registros que fueron barridos y tuvieron algun tipo de contacto-- 
  -- Grupo: WEB, TMK, FALTA DE PAGO y CONSUMO MASIVO: 
  WHEN (tipo_operador in ('INTE','CSOC','SUCU','IVR','ACC') AND cod_gestion in ('OFE','VTA','M404','M439','M181','M185','M418','M063','M459','M186','M415','M416','M505','NAMS','M528','M060','M062','SU06','M556') AND (grupo_campana in ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','CONSUMO MASIVO','OTROS TMK') or grupo_campana is null))
  or (tipo_operador in ('CS') AND cod_gestion in ('M403','OC53','OCEF','M479') AND grupo_campana in ('CONSUMO MASIVO'))
@@ -364,7 +364,7 @@ CASE --LC: flg_contactado - Marca los registros que fueron barridos y tuvieron a
   ELSE 0
 END AS flg_contactado,
 
-CASE --LC: flg_no_contactado - Marca los registros que fueron barridos y no lograron ser contactados--
+CASE --NT: flg_no_contactado - Marca los registros que fueron barridos y no lograron ser contactados--
  -- Grupo: WEB, TMK, FALTA DE PAGO y CONSUMO MASIVO: 
  WHEN (tipo_operador IN ('INTE','CSOC','SUCU','IVR','ACC') AND cod_gestion IN ('M179','M178','N/C','VLL','NCAU','NCCA') AND (grupo_campana IN ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','CONSUMO MASIVO','OTROS TMK') OR grupo_campana is null))
  or (tipo_operador in ('CS') AND cod_gestion in ('OCOM') AND grupo_campana in ('CONSUMO MASIVO'))
@@ -385,7 +385,7 @@ CASE --LC: flg_no_contactado - Marca los registros que fueron barridos y no logr
   ELSE 0
 END AS flg_no_contactado,
 
-CASE --LC: flg_contacto_elegible - Marca los registros que fueron barridos, tuvieron un contacto y son elegibles-- 
+CASE --NT: flg_contacto_elegible - Marca los registros que fueron barridos, tuvieron un contacto y son elegibles-- 
  -- Grupo: WEB, TMK, FALTA DE PAGO y CONSUMO MASIVO: 
  WHEN (tipo_operador in ('INTE','CSOC','SUCU','IVR','ACC') AND cod_gestion in ('OFE','VTA','M404','M439','M181','M185','M459','M186','M415','M505','M060','M062','M066','SU06','M556') AND (grupo_campana in ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','CONSUMO MASIVO','OTROS TMK') or grupo_campana is null))
  or (tipo_operador in ('CS') AND cod_gestion in ('M403','OC53','OCEF','M479') AND grupo_campana in ('CONSUMO MASIVO'))
@@ -405,7 +405,7 @@ CASE --LC: flg_contacto_elegible - Marca los registros que fueron barridos, tuvi
  ELSE 0
 END as flg_contacto_elegible,
 
-CASE --LC: flg_contacto_no_elegible - Marca los registros que fueron barridos, tuvieron algun contacto pero no son elegibles--
+CASE --NT: flg_contacto_no_elegible - Marca los registros que fueron barridos, tuvieron algun contacto pero no son elegibles--
  -- Grupo: WEB, TMK, FALTA DE PAGO y CONSUMO MASIVO: 
  WHEN (tipo_operador in ('INTE','CSOC','SUCU','IVR','ACC') AND cod_gestion in ('M418','M063','M416','NAMS','M528') AND (grupo_campana in ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','CONSUMO MASIVO','OTROS TMK') or grupo_campana is null))
  -- Grupo: COBRANZAS y RETENCION:
@@ -419,7 +419,7 @@ CASE --LC: flg_contacto_no_elegible - Marca los registros que fueron barridos, t
  ELSE 0
 END as flg_contacto_no_elegible,
 
-CASE --LC: flg_contacto_venta - Marca los registros que fueron barridos, tuvieron algun cotacto y se "gestionaron" como venta (pueden no ser ventas reales)--
+CASE --NT: flg_contacto_venta - Marca los registros que fueron barridos, tuvieron algun cotacto y se "gestionaron" como venta (pueden no ser ventas reales)--
  -- Grupo: WEB, TMK, FALTA DE PAGO y POST FINANCIADO:
  WHEN (tipo_operador in ('INTE','CSOC','SUCU','IVR','ACC') AND cod_gestion in ('OFE','VTA') AND (grupo_campana in ('WEB','WEB TMK','TMK','TMKE','FALTA DE PAGO INDIRECTO','POST FINANCIADO','COTIZO Y NO CONTRATO','CROSS SELL CONSUMO MASIVO','COBRANZAS','OTROS TMK') or grupo_campana is null))
  or (tipo_operador in ('SUCU','TMKE') AND cod_gestion in ('SU06') AND (grupo_campana in ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','POST FINANCIADO','COTIZO Y NO CONTRATO','CROSS SELL CONSUMO MASIVO','COBRANZAS','OTROS TMK') or grupo_campana is null))
@@ -427,7 +427,7 @@ CASE --LC: flg_contacto_venta - Marca los registros que fueron barridos, tuviero
  ELSE 0
 END as flg_contacto_venta,
 
-CASE --LC: flg_contacto_no_util - Marca a los registros que son calificado como no útil. No llegan a ser barridos, por lo menos por una persona--
+CASE --NT: flg_contacto_no_util - Marca a los registros que son calificado como no útil. No llegan a ser barridos, por lo menos por una persona--
  -- Grupo: WEB, TMK, FALTA DE PAGO y CONSUMO MASIVO: 
  WHEN (tipo_operador in ('INTE','CSOC','SUCU','IVR','ACC') AND cod_gestion in ('OCPW','OOFA','M180','M460') AND (grupo_campana in ('WEB','WEB TMK','TMK','FALTA DE PAGO INDIRECTO','CONSUMO MASIVO','OTROS TMK') or grupo_campana is null))
  or (tipo_operador in ('CS') AND cod_gestion in ('OC48','OCIC','NTTE') AND grupo_campana in ('CONSUMO MASIVO')) 
@@ -512,7 +512,7 @@ CASE
  WHEN rn = 1
  THEN 1
  ELSE 0
-END AS flg_insertados, --LC: Se construye el flg_insertados para marcar los originales solamente, producto del join entre insertados y performance--
+END AS flg_insertados, --NT: Se construye el flg_insertados para marcar los originales solamente, producto del join entre insertados y performance--
 
 FROM tmp_2
 )
@@ -893,7 +893,7 @@ SELECT
 
 FROM tmp_12
 
-WHERE  ult_act = 1          --LC: Filtramos la última fecha lote para quedarnos con la version mas actualizada de los nuevos grupos definidos por el negocio--       
+WHERE  ult_act = 1          --NT: Filtramos la última fecha lote para quedarnos con la version mas actualizada de los nuevos grupos definidos por el negocio--       
 )
 
 --Step 5_2: Se realiza la unificación con performance para agregar el campo grupo_corregido_camp--

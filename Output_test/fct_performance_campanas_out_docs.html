@@ -1,0 +1,376 @@
+
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Process Tabla de Datos</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #2c2c2c;
+                color: #fffcf2;
+                text-align: left;
+                padding: 25px;
+            }
+            h2 {
+                color: #fffcf2;
+            }
+            table {
+                margin: auto;
+                border-collapse: collapse;
+                background-color: #252422;
+                color: #fffcf2;
+                text-align: left;
+                width: 100%; /* Ajusta el ancho al 100% del contenedor */
+                table-layout: auto;  /* Ajusta el ancho de las columnas al contenido */
+            }
+            th, td {
+                border-left: none;
+                border-right: none;
+                border-top: 0.5px solid #555555;
+                border-bottom: 0.5px solid #555555;
+                padding: 10px;
+                text-align: left;
+                
+            }
+            th {
+                background-color: #444;
+            }
+            .Clase {
+                min-width: 100px;               /* Ajusta el ancho de la columna Ciudad */
+            } 
+            .summary {
+                font-family: Arial, sans-serif;
+                font-size: 17px;                /* Aumenta el tamaño de la letra */
+                background-color: #f0ecdc;
+                color: #252422;
+                text-align: left;
+                margin: 10px 0 10px 0;          /* Ajusta el margen superior e inferior */
+                padding: 10px;
+                border-radius: 10px;            /* Redondea los bordes */
+                padding-left: 20px;             /* Añade sangría a cada elemento */
+                white-space: pre-wrap;          /* Permite saltos de línea y adapta el texto */ 
+                
+            }
+            .icono {
+                color: #630a0a ; /* Cambia el color del icono */
+            
+            }
+            .icono_2 {
+                color: #630a0a ; /* Cambia el color del icono */
+    
+            }
+            .source {
+                font-family: Arial, sans-serif;
+                font-size: 17px; /* Aumenta el tamaño de la letra */
+                background-color: #f0ecdc;
+                color: #343434;
+                text-align: left;
+                margin: 10px 0 10px 0; /* Ajusta el margen superior e inferior */
+                padding: 10px;
+                border-radius: 10px; /* Redondea los bordes */
+                padding-left: 20px; /* Añade sangría a cada elemento */
+                white-space: pre-wrap; /* Permite saltos de línea y adapta el texto */
+            }
+            /* Estilo para centrar el logo */
+            .logo-container {
+                text-align: left;         /* Logo a la derecha */
+                padding-right: 25px;      /* Igual que el padding del body para alinear */
+            }
+            .logo-container img {
+                max-width: 200px; /* Tamaño máximo del logo */
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>        
+        <div class="logo-container">
+        <img src="../Pictures/Logo_SQL_Docs_Wide_Up.png" alt="Logo">
+        </div>
+        <pre class="summary"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #483e3e;'>Query Summary</h4>
+  <i class="fas fa-calendar-alt icono"></i> <b style="color: #483e3e;">Created Date:</b> 2023/08/01
+
+  <i class="fa-solid fa-pen-to-square icono"></i> <b style="color: #483e3e;">Description:</b> Esta query realiza la medición de la performance de las campañas out, calculando los siguientes indicadores: insertados, disponibilizado, barridos, contactados, no contactados y no útil. Para su construccion se utiliza diferentes logicas que combinan gestiones, tipos de operador y grupos de campañas definidas por el negocio y persistidas en la query a partir de paso xxx.
+
+  <i class="fas fa-book icono"></i> <b style="color: #483e3e;">References:</b> N/A</pre>
+        <pre class="summary"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Related Programs</h4>
+<i class="fa fa-file-text icono"></i> Query:fct_altas_campanas_out</pre>
+        <pre class="source"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Sources</h4>
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_proxima_interacciones`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_campanas`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_detalle_interacciones`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_operadores`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_campanas`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_gestiones`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_emi_presu_solic`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_domicilios`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.polaris.act_tb_codigo_postales`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.dwh.lkp_clientes`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.dwh.lkp_cp_prov_zona`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.dwh.lkp_tipo_combustible`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.dwh.fct_poliza_altas_bajas`
+<i class="fa fa-sign-out icono"></i> `prdanalyticsbqprded5b.externo.act_perfo_campanas_grupos`</pre>
+        <pre class="source"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Products</h4>
+  <i class="fa-solid fa-box-archive icono_2"></i> <b style="color: #483e3e;"> Product </b> 1: 
+
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;"> Description:</b> Tabla temporal que contiene todos los insertados provenientes de tb_proxima_interaccion.
+     <i class="fa-solid fa-angle-right icono"></i></i> <b style="color: #483e3e;"> Name:</b> tmp.tmp_insertados_campanas 
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Type:</b> Tabla temporal
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Process:</b> Create or Replace
+
+                                                                                                              
+  <i class="fa-solid fa-box-archive icono_2"></i> <b style="color: #483e3e;"> Product </b> 2:
+
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;"> Description:</b> Tabla temporal que contiene todas las interacciones relativas a campañas Out provenientes de tb_interacciones y tb_detalle_interacciones. En esta del código se realiza la construcción de los indicadores.
+     <i class="fa-solid fa-angle-right icono"></i></i> <b style="color: #483e3e;"> Name:</b> tmp.tmp_campanas_performance
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Type:</b> Tabla temporal
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Process:</b> Create or Replace
+
+                                                                                                              
+  <i class="fa-solid fa-box-archive icono_2"></i> <b style="color: #483e3e;"> Product </b> 3: 
+
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;"> Description:</b> Tabla final que unifica los insertados en campaña, interacciones y aplica la laogica de negocio para la construccion de los indicadores de performance (barrido, contatado, no contactado, no util, etc.)
+     <i class="fa-solid fa-angle-right icono"></i></i> <b style="color: #483e3e;"> Name:</b> dwh.fct_performance_campanas_out
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Type:</b> Tabla final
+     <i class="fa-solid fa-angle-right icono"></i> <b style="color: #483e3e;">Process:</b> Create or Replace</pre>
+        <pre class="source"><h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Historical Versions</h4>
+<i class="fa-solid fa-map-pin icono"></i>    23/04/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se modifico la lógica de disponibilizados para que tambien contemple el motivo BLACK. Se agrego la unificación con la tabla externa que contiene los grupos de campañas para tomar los grupos corregidos.
+<i class="fa-solid fa-map-pin icono"></i>    23/04/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se incorpora la tabla dimensionales alimentada por el negocio con los nuevos grupos de campañas bajo el campo "grupo_corregido_camp".   
+<i class="fa-solid fa-map-pin icono"></i>    12/05/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se agrega una nueva regla de medición para el tipo de operado CS y grupo Administrativas. 
+<i class="fa-solid fa-map-pin icono"></i>    22/05/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se modifica el nombre del campo num_secu_pol por id_pol. Se modifica el nombre del cambo mca_0km por flg_0km y se reemplazan los null de ese campo por 0.
+<i class="fa-solid fa-map-pin icono"></i>    04/07/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se agrega una nueva logica en gestiones para el tipo de operador ACC, grupo Consumo Masivo.
+<i class="fa-solid fa-map-pin icono"></i>    08/07/2025 <span style="color: #c9820d;">(Emiliano Rigueiro)</span>  Se agrega una nueva logica en gestiones para el tipo de operador CS y los grupos Web, Retencion, Consumo Masivo, Administrativa y Agendamiento.</pre>
+        <h2>Process Comments</h2>
+        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Order</th>
+      <th class="Clase">Clase</th>
+      <th class="Comment">Comment</th>
+      <th>Line</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="Comment">1</td>
+      <td class="Comment">Step  1</td>
+      <td class="Comment">Se crea la tabla temporal de insertados con todos los registros insertados de las campañas de interes (Out) con sus respectivas dimensiones</td>
+      <td class="Comment">72</td>
+    </tr>
+    <tr>
+      <td class="Comment">2</td>
+      <td class="Comment">Step  1.1</td>
+      <td class="Comment">Se realiza un join entre proximas_interacciones y tb_campanas mediante el id_camp para traer las dimensiones necesarias de cada campaña</td>
+      <td class="Comment">100</td>
+    </tr>
+    <tr>
+      <td class="Comment">3</td>
+      <td class="Comment">Note</td>
+      <td class="Comment">Se unifican cif_id y referido_id en un nuevo campo "id_insertados". En caso que el cif_id este vacio le pega el referido_id</td>
+      <td class="Comment">107</td>
+    </tr>
+    <tr>
+      <td class="Comment">4</td>
+      <td class="Comment">Note</td>
+      <td class="Comment">Se crea el flg_campana_activa. Marca como activas a aquellas campañas que tienen fecha de vencimiento mayor a la del día de consulta (1 = activa)</td>
+      <td class="Comment">113</td>
+    </tr>
+    <tr>
+      <td class="Comment">5</td>
+      <td class="Comment">Note</td>
+      <td class="Comment">Se marrcan las campañas que se segmentan en SalesForce. Toma las campañas que comienzan en su descricpión con SF (1 = esta en SalesForce)</td>
+      <td class="Comment">125</td>
+    </tr>
+    <tr>
+      <td class="Comment">6</td>
+      <td class="Comment">Note</td>
+      <td class="Comment">Se define la ventana de tiempo sobre la cual se van a tomar los inesrtados de campañas y posteriormente se va a correr el proceso de construccion de los indicadores</td>
+      <td class="Comment">145</td>
+    </tr>
+    <tr>
+      <td class="Comment">7</td>
+      <td class="Comment">Step  2</td>
+      <td class="Comment">Se crea la tabla temporal intermedia tmp_campanas_performance en donde se realiza una unificacion entre las tablas de detalle interacciones e interacciones para contar con el universo total de interacciones y proceder posteriormente a aplicar las reglas definidas por el negocio y construir los indicadores de contactado, no contactado, util, etc. Las reglas de negocio consisten en combinaciones entre tres tipos de datos (tipo_operador, cod_gestion y grupo_campana)</td>
+      <td class="Comment">149</td>
+    </tr>
+    <tr>
+      <td class="Comment">8</td>
+      <td class="Comment">Note</td>
+      <td class="Comment">Limitamos el universo solo a las gestiones utilizadas para el calculo de los indicadores provenientes de la tabla detalle interaccones (esto se realiza para recortar el universo de la tabla de detalle interacciones y mejorar la performance de la query)</td>
+      <td class="Comment">161</td>
+    </tr>
+    <tr>
+      <td class="Comment">10</td>
+      <td class="Comment">Step  2.1</td>
+      <td class="Comment">Se realiza la unificación entre tb_interacciones, tb_detalle_intreacciones, tb_operadores y tb_campanas</td>
+      <td class="Comment">167</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Step  2.2</td>
+      <td>Se realiza la unificacion de campos claves para la construccion de los indicadores</td>
+      <td>210</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Note</td>
+      <td>Se reemplaza la gestion de detalle_inte por la de interacciones cuando la de detalle esta en null. (La que manda es la gestion de detalle, si esta viene vacia entonces toma la de interacciones)</td>
+      <td>215</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Note</td>
+      <td>Se reemplaza el campo fecha_barrido_detalle por el de interacciones cuando la de detalle esta en null. (La que manda es la gestion de detalle, si esta viene vacia entonces toma la de interacciones)</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Step  2.3</td>
+      <td>Se realiza la unificación con la tabla gestiones para traer los datos de la descripcion de la gestion</td>
+      <td>243</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Step  2.4</td>
+      <td>Se construyen los indicadores de performance utilizando una combinación entre tipo de operador, código de gestión y grupo de campaña</td>
+      <td>285</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Note</td>
+      <td>flg_barrido - Marca todos los registros que son barridos, puede ser por un operador humano o una maquina</td>
+      <td>290</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>Note</td>
+      <td>flg_barrido_humano - Marca los registros que son barridos por un operador humano</td>
+      <td>312</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>Note</td>
+      <td>flg_barrido_automaico - Marca los registros que son barridos por el llamador automático</td>
+      <td>333</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>Note</td>
+      <td>flg_contactado - Marca los registros que fueron barridos y tuvieron algun tipo de contacto</td>
+      <td>346</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>Note</td>
+      <td>flg_no_contactado - Marca los registros que fueron barridos y no lograron ser contactados</td>
+      <td>367</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>Note</td>
+      <td>flg_contacto_elegible - Marca los registros que fueron barridos, tuvieron un contacto y son elegibles</td>
+      <td>388</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>Note</td>
+      <td>flg_contacto_no_elegible - Marca los registros que fueron barridos, tuvieron algun contacto pero no son elegibles</td>
+      <td>408</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>Note</td>
+      <td>flg_contacto_venta - Marca los registros que fueron barridos, tuvieron algun cotacto y se "gestionaron" como venta (pueden no ser ventas reales)</td>
+      <td>422</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>Note</td>
+      <td>flg_contacto_no_util - Marca a los registros que son calificado como no útil. No llegan a ser barridos, por lo menos por una persona</td>
+      <td>430</td>
+    </tr>
+    <tr>
+      <td>57</td>
+      <td>Step  3</td>
+      <td>Proceso para realiza la creacion de la tabla fct_performance_campanas_out. Esta tabla contiene toda las informacion de performance de campañas modelada, a excepcion de las ventas que por la complejidad del proceso se persisten en otra tabla</td>
+      <td>483</td>
+    </tr>
+    <tr>
+      <td>58</td>
+      <td>Step  3.1</td>
+      <td>Se realiza la unificacion entre la tabla temporal tmp_insertados_camapnas y tmp_campanas_perforance utilizando el proxinte_id</td>
+      <td>487</td>
+    </tr>
+    <tr>
+      <td>59</td>
+      <td>Note</td>
+      <td>Se construye el flg_insertados para marcar los originales solamente, producto del join entre insertados y performance</td>
+      <td>515</td>
+    </tr>
+    <tr>
+      <td>60</td>
+      <td>Step  3.3</td>
+      <td>Creación de la tabla intermedia con el recorte de registros sin proxinte_id, para posteriormente realizar un UNION y no dejarlos afuera ya que como hay muchos casos que no tiene proxinte_id pero si una interacción, cuando cruzamos INSERTADOS Y PERFORMANCE usando proxinte_id quedan afuera</td>
+      <td>574</td>
+    </tr>
+    <tr>
+      <td>62</td>
+      <td>Step  3.4</td>
+      <td>Se realiza la unificacion entre el universo que cuenta con proxinte_id y el que no</td>
+      <td>636</td>
+    </tr>
+    <tr>
+      <td>63</td>
+      <td>Step  4</td>
+      <td>Proceso para incorporar nuevas dimensiones a la tabla fct_performance_campanas_out. Se agrega el segmento de cliente y caracteristicas del vehiculo segmentado en campania</td>
+      <td>736</td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>Step  4.1</td>
+      <td>Unificación de la tabla de Clientes con la de Performance para traer el dato de segmento</td>
+      <td>748</td>
+    </tr>
+    <tr>
+      <td>65</td>
+      <td>Step  4.2</td>
+      <td>Proceso para traer caracteristicas del presupuesto en funcion del cual se realizo la segmentacion del registro en campaña</td>
+      <td>757</td>
+    </tr>
+    <tr>
+      <td>67</td>
+      <td>Step  4.3</td>
+      <td>Proceso para traer caracteristicas de la póliza por la cual se realizo la segmentacion del registro en campaña.Los datos de las campañas de post financiado en interface no se registran con número de póliza, por que la inserción en manual, en consecuencia no se pueden obtener los datos</td>
+      <td>787</td>
+    </tr>
+    <tr>
+      <td>68</td>
+      <td>Step  5</td>
+      <td>Proceso para agegar el campo de grupo campañas corregido. Esta nueva agrupación la define el negocio en una tabla dimensional externa</td>
+      <td>871</td>
+    </tr>
+    <tr>
+      <td>69</td>
+      <td>Step  5.1</td>
+      <td>Se prepara la tabla externa que contiene la nueva definición de grupo, previo al cruce</td>
+      <td>874</td>
+    </tr>
+    <tr>
+      <td>70</td>
+      <td>Note</td>
+      <td>Filtramos la última fecha lote para quedarnos con la version mas actualizada de los nuevos grupos definidos por el negocio</td>
+      <td>896</td>
+    </tr>
+    <tr>
+      <td>71</td>
+      <td>Step  5.2</td>
+      <td>Se realiza la unificación con performance para agregar el campo grupo_corregido_camp</td>
+      <td>899</td>
+    </tr>
+  </tbody>
+</table>
+    </body>
+    </html>
+    

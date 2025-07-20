@@ -31,7 +31,7 @@
 ---------------------------------------------------------------------------------------------------------------
 --Product 1: 
 
---Description: Esta tabla contiene todos las altas correspondientes a las campañas out.
+--Description: Tabla que contiene todos las altas correspondientes a las campañas out.
 --Name: `usr_rigueiro.fct_altas_campanas_out_test`
 --Type: Tabla final
 --Process: Create or Replace
@@ -101,9 +101,9 @@ SELECT
 
 FROM tmp_ventas_campanas LEFT JOIN tmp_2 ON tmp_ventas_campanas.cod_ramo_alta = tmp_2.cod_ramo
 
-WHERE tmp_ventas_campanas.tipo_operador IN ('INTE','CSOC') --LC: Se limita el universo solo a los tipos de operador INTE y CSOC ya que son los únicos 2 tipos que trabajan las campañas Web--
+WHERE tmp_ventas_campanas.tipo_operador IN ('INTE','CSOC') --NT: Se limita el universo solo a los tipos de operador INTE y CSOC ya que son los únicos 2 tipos que trabajan las campañas Web--
 AND cod_cia = 1
-AND DATE(fecha_interaccion) <= DATE(fec_alta)              --LC: Se filtran las fechas de altas, para que siempre sean posteriores a las fechas de inserción--
+AND DATE(fecha_interaccion) <= DATE(fec_alta)              --NT: Se filtran las fechas de altas, para que siempre sean posteriores a las fechas de inserción--
 )
 
 --Step 1_4: Se crea el flg_alta para identificar las altas en funcion de la combinación del tipo de operador y el grupo al que pertenece la campaña-- 
@@ -128,7 +128,7 @@ SELECT tmp_3.id_camp,
        tmp_3.codigo                      AS cod_camp,                                              
        tmp_3.tiempo_rellamado,
        tmp_3.desc_ramo,
-       CASE WHEN (tipo_operador in ('INTE','CSOC') AND (crm_grupo in ('WEB','WEB TMK','TMK')) or crm_grupo is null) --LC: Se crea el flg_alta para los grupos de campañas: WEB, WEB TMK, TMK, NULL y tipo de operador INTE Y CSOC--
+       CASE WHEN (tipo_operador in ('INTE','CSOC') AND (crm_grupo in ('WEB','WEB TMK','TMK')) or crm_grupo is null) --NT: Se crea el flg_alta para los grupos de campañas: WEB, WEB TMK, TMK, NULL y tipo de operador INTE Y CSOC--
             THEN 1
             ELSE 0
             END AS flg_alta            
@@ -195,7 +195,7 @@ SELECT DISTINCT
        flg_mov_emi,
                  
 FROM `dwh.fct_poliza_altas_bajas` 
-WHERE cod_agencia_ges = 5779 --LC: Se limita el universo de las pólizas con alta a aquellas generadas solamente por el código de agencia gestionadora 5779--
+WHERE cod_agencia_ges = 5779 --NT: Se limita el universo de las pólizas con alta a aquellas generadas solamente por el código de agencia gestionadora 5779--
 AND flg_mov_emi = 1
 )
 
@@ -226,7 +226,7 @@ FROM `polaris.act_tb_proxima_interacciones` AS prox_interacciones
 LEFT JOIN `polaris.act_tb_campanas` AS campanas on prox_interacciones.campan_id = campanas.id 
 
 WHERE crm_grupo = 'POST FINANCIADO'
-AND  prox_interacciones.campan_id not in (127210, 126816, 126817, 126818, 126819, 126820) --LC: se eliminan las altas de click to buy ya que no queremos que queden altas asociadas a estas campañas--
+AND  prox_interacciones.campan_id not in (127210, 126816, 126817, 126818, 126819, 126820) --NT: se eliminan las altas de click to buy ya que no queremos que queden altas asociadas a estas campañas--
 )
 
 --Step 2_3: Se realiza la unificación entre las altas y los registros segmentados en las campañas de Post Financiado utilizado el cif_id (esto es critico, ya que al poder estar un registro insertado en mas de una campaña, si se hace el join directamente con la tabla de altas se terminan asociando las altas a campañas que no corresponden)--
@@ -260,7 +260,7 @@ SELECT tmp_4_f.*
 
 FROM tmp_4_f
 
-WHERE flg_alta_financiado = 1 --LC: Se limitan el universo a las altas de los insertados del mismo mes-- 
+WHERE flg_alta_financiado = 1 --NT: Se limitan el universo a las altas de los insertados del mismo mes-- 
 )
 
 --Step 2_6: Se agregan campos adicionales relativos a la venta: operador, supervisor, tipo_operador y prima-- 
@@ -284,7 +284,7 @@ SELECT
       tmp_6_f.*,
       
 FROM tmp_6_f
-LEFT JOIN tmp_5_f ON tmp_5_f.id_pol = tmp_6_f.num_secu_pol_ven --LC: Para realizar el join entre el proceso que construimos y campanas_ventas utilizamos el num_secu_pol
+LEFT JOIN tmp_5_f ON tmp_5_f.id_pol = tmp_6_f.num_secu_pol_ven --NT: Para realizar el join entre el proceso que construimos y campanas_ventas utilizamos el num_secu_pol
 )
 
 --Step 2_7: Se limita el universo a codigo de compañia 1--
@@ -329,7 +329,7 @@ SELECT t.*,
        
 FROM (
   SELECT *,
-    ROW_NUMBER() OVER (PARTITION BY id_pol ORDER BY fec_alta desc) AS rn --LC: Se filtran duplicados, producto de la relación insertados - altas--
+    ROW_NUMBER() OVER (PARTITION BY id_pol ORDER BY fec_alta desc) AS rn --NT: Se filtran duplicados, producto de la relación insertados - altas--
   FROM tmp_8_f
 ) t
 WHERE t.rn = 1 AND usr_operador != 'INTERNET'
@@ -417,7 +417,7 @@ SELECT tmp_4_fp.*
 
 FROM tmp_4_fp
 
-WHERE flg_alta_faltapago = 1 --LC: Limitamos el universo a las altas de los insertados del mismo mes-- 
+WHERE flg_alta_faltapago = 1 --NT: Limitamos el universo a las altas de los insertados del mismo mes-- 
 )
 
 , tmp_6_fp AS
@@ -429,7 +429,7 @@ SELECT DISTINCT
                ven.tipo_operador,
                CAST(ven.prima AS FLOAT64) AS prima
 
-FROM `polaris.act_tb_campanas_ventas` AS ven --LC: Se seleccionan los campos necesarios de la tabla campanas_ventas (operador, supervisor y prima)--
+FROM `polaris.act_tb_campanas_ventas` AS ven --NT: Se seleccionan los campos necesarios de la tabla campanas_ventas (operador, supervisor y prima)--
 
 WHERE operador != 'INTERNET'
 
@@ -442,7 +442,7 @@ SELECT
       tmp_6_fp.*,
       
 FROM tmp_6_fp
-LEFT JOIN tmp_5_fp ON tmp_5_fp.id_pol = tmp_6_fp.num_secu_pol_ven --LC: Para realizar el join entre el proceso que construimos y campanas_ventas utilizamos el num_secu_pol--
+LEFT JOIN tmp_5_fp ON tmp_5_fp.id_pol = tmp_6_fp.num_secu_pol_ven --NT: Para realizar el join entre el proceso que construimos y campanas_ventas utilizamos el num_secu_pol--
 
 )
 
@@ -477,7 +477,7 @@ FROM tmp_7_fp
 
 LEFT JOIN `dwh.lkp_ramo` AS prod 
 ON tmp_7_fp.cod_ramo_alta = prod.cod_ramo
-WHERE cod_cia = 1 --LC: Nos quedamos solo con los ramos de cia 1 para evitar duplicados--
+WHERE cod_cia = 1 --NT: Nos quedamos solo con los ramos de cia 1 para evitar duplicados--
 )
 
 , altas_falta_de_pago AS
@@ -553,7 +553,7 @@ SELECT tmp_1_fp_suc.*,
 
 
 FROM tmp_1_fp_suc
-LEFT JOIN tmp_2_fp_suc ON tmp_1_fp_suc.id_cliente_tomador = tmp_2_fp_suc.id_cliente --LC: Se unifica la tabla de altas con la de prox_inte - campañas--
+LEFT JOIN tmp_2_fp_suc ON tmp_1_fp_suc.id_cliente_tomador = tmp_2_fp_suc.id_cliente --NT: Se unifica la tabla de altas con la de prox_inte - campañas--
 )
 
 , tmp_4_fp_suc AS
@@ -562,13 +562,13 @@ SELECT tmp_3_fp_suc.*,
     
 
 CASE 
- WHEN (fec_insercion <= fec_alta AND fec_insercion >= DATE_SUB(fec_alta, INTERVAL 90 DAY)) --LC: Condición para que contar solamente las altas de los insertados hasta 60 días dsp de la inserción. Se llevo a 60 días a pedido de G.Etichichurry--
+ WHEN (fec_insercion <= fec_alta AND fec_insercion >= DATE_SUB(fec_alta, INTERVAL 90 DAY)) --NT: Condición para que contar solamente las altas de los insertados hasta 60 días dsp de la inserción. Se llevo a 60 días a pedido de G.Etichichurry--
  THEN 1
  ELSE 0
 END AS flg_alta_faltapago 
 FROM tmp_3_fp_suc
 
-WHERE fec_insercion <= fec_alta --LC: Condición para que no existan altas con fecha anterior a la de inserción-- 
+WHERE fec_insercion <= fec_alta --NT: Condición para que no existan altas con fecha anterior a la de inserción-- 
 )
 
 , tmp_5_fp_suc AS
@@ -577,7 +577,7 @@ SELECT tmp_4_fp_suc.*
 
 FROM tmp_4_fp_suc
 
-WHERE flg_alta_faltapago = 1 --LC: Limitamos el universo a las altas de los insertados del mismo mes-- 
+WHERE flg_alta_faltapago = 1 --NT: Limitamos el universo a las altas de los insertados del mismo mes-- 
 )
 
 , tmp_6_fp_suc AS
@@ -589,7 +589,7 @@ SELECT DISTINCT
                ven.tipo_operador,
                CAST(ven.prima AS FLOAT64) AS prima
 
-FROM `polaris.act_tb_campanas_ventas` AS ven --LC: Se seleccionan los campos necesarios de la tabla campanas_ventas (operador, supervisor y prima)--
+FROM `polaris.act_tb_campanas_ventas` AS ven --NT: Se seleccionan los campos necesarios de la tabla campanas_ventas (operador, supervisor y prima)--
 
 WHERE operador in ('ACEVEDON','ALONSOMA','CAMPESE','CAROL','CLAVIO',
                    'CULLIA','DIAZMEM','GUDINO','LAPORTA','LOCONSOV',
@@ -598,7 +598,7 @@ WHERE operador in ('ACEVEDON','ALONSOMA','CAMPESE','CAROL','CLAVIO',
                    'CHATTAS','FERRO','KETTE','LUCENTTI',
                    'PALAC01','RUIZD','SOTELOC','TOMAS',
                    'TULA','VALENTE','VEGAV','MARSALAR',
-                   'ZAFFE','ZAMORAM','GARCETEF') --LC: Solo algunos operador realizan esta campañas, por eso los harcodeamos. No existe otra manera de identificarlos-- 
+                   'ZAFFE','ZAMORAM','GARCETEF') --NT: Solo algunos operador realizan esta campañas, por eso los harcodeamos. No existe otra manera de identificarlos-- 
 )
 
 , tmp_7_fp_suc AS
@@ -643,7 +643,7 @@ FROM tmp_7_fp_suc
 
 LEFT JOIN `dwh.lkp_ramo` AS prod 
 ON tmp_7_fp_suc.cod_ramo_alta = prod.cod_ramo
-WHERE cod_cia = 1 --LC: Nos quedamos solo con los ramos de cia 1 para evitar duplicados--
+WHERE cod_cia = 1 --NT: Nos quedamos solo con los ramos de cia 1 para evitar duplicados--
 )
 
 , altas_falta_de_pago_suc AS
@@ -652,7 +652,7 @@ SELECT t.*,
        
 FROM (
   SELECT *,
-    ROW_NUMBER() OVER (PARTITION BY id_pol ORDER BY fec_alta desc) AS rn --LC: Se útiliza para eliminar duplicados, producto de la relación insertados - altas--
+    ROW_NUMBER() OVER (PARTITION BY id_pol ORDER BY fec_alta desc) AS rn --NT: Se útiliza para eliminar duplicados, producto de la relación insertados - altas--
   FROM tmp_8_fp_suc
 ) t
 WHERE t.rn = 1
@@ -679,7 +679,7 @@ SELECT DISTINCT
            
 FROM `dwh.fct_poliza_altas_bajas` 
 WHERE flg_mov_emi = 1
-AND canal_emi = 'Sucursal' --LC: Limitamos el universo de las altas solamente a las de sucursal ya que las altas de las campañas de Beta solo las realizan las sucursales--
+AND canal_emi = 'Sucursal' --NT: Limitamos el universo de las altas solamente a las de sucursal ya que las altas de las campañas de Beta solo las realizan las sucursales--
 )
 
 , tmp_2_be AS
@@ -708,7 +708,7 @@ SELECT
 FROM `polaris.act_tb_proxima_interacciones` AS prox_interacciones
 LEFT JOIN `polaris.act_tb_campanas` AS campanas on prox_interacciones.campan_id = campanas.id 
 
---LC: Se filtra previamente el grupo de campañas de beta para que cuando se realice el join con las altas, estas últimas solo se asignen a las campañas de financiado (esto es critico, ya que al poder estar un registro insertado en mas de una campaña, si se hace el join directamente con la tabla de altas se terminan asociando las altas a campañas que no corresponden.ESTA PARTE ESTA HARDCODEADA POR QUE EL GRUPO "BETA" ESTA MAL)--
+--NT: Se filtra previamente el grupo de campañas de beta para que cuando se realice el join con las altas, estas últimas solo se asignen a las campañas de financiado (esto es critico, ya que al poder estar un registro insertado en mas de una campaña, si se hace el join directamente con la tabla de altas se terminan asociando las altas a campañas que no corresponden.ESTA PARTE ESTA HARDCODEADA POR QUE EL GRUPO "BETA" ESTA MAL)--
 WHERE prox_interacciones.campan_id in (127395,127397,127440,127441,127396,127438,127398,127439)
 )
 
@@ -731,11 +731,11 @@ CASE
  WHEN (mes_fec_proceso = mes_fec_alta) 
  THEN 1
  ELSE 0
-END AS flg_alta_financiado --LC: Condición para que las altas se correspondan a insertados del mismo mes-- 
+END AS flg_alta_financiado --NT: Condición para que las altas se correspondan a insertados del mismo mes-- 
 
 FROM tmp_3_be
 
-WHERE fec_insercion <= fec_alta --LC: Condición para que no existan altas con fecha anterior a la de inserción-- 
+WHERE fec_insercion <= fec_alta --NT: Condición para que no existan altas con fecha anterior a la de inserción-- 
 )
 
 , tmp_5_be AS
@@ -847,7 +847,7 @@ SELECT
        tiempo_rellamado,
        desc_ramo,
        flg_alta
-FROM altas_web_null --LC: Altas de campañas Web y Null--
+FROM altas_web_null --NT: Altas de campañas Web y Null--
 
 UNION ALL
 
@@ -875,7 +875,7 @@ SELECT
       tiempo_rellamado,
       desc_ramo,
       flg_alta
-FROM altas_financiado --LC: Altas de campañas Post Financiado--
+FROM altas_financiado --NT: Altas de campañas Post Financiado--
 
 UNION ALL
 
@@ -903,7 +903,7 @@ SELECT
       tiempo_rellamado,
       desc_ramo,
       flg_alta
-FROM altas_falta_de_pago --LC: Altas de campañas Falta de Pago--
+FROM altas_falta_de_pago --NT: Altas de campañas Falta de Pago--
 
 UNION ALL
 
@@ -931,7 +931,7 @@ SELECT
       tiempo_rellamado,
       desc_ramo,
       flg_alta
-FROM altas_falta_de_pago_suc --LC: Altas de campañas Falta de Pago--
+FROM altas_falta_de_pago_suc --NT: Altas de campañas Falta de Pago--
 
 UNION ALL
 
@@ -959,7 +959,7 @@ SELECT
       tiempo_rellamado,
       desc_ramo,
       flg_alta
-FROM altas_beta --LC: Altas de campañas Beta--
+FROM altas_beta --NT: Altas de campañas Beta--
 )
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
