@@ -29,7 +29,7 @@ Framowork format & description:
 
 --<
 ---------------------------------------------------------------------------------------------------------------
---Sources: Easy all the suorces used in this query. Formtat: -- xxxxxxx          
+--Sources: Easy all the suorces used in the query. Formtat: -- xxxxxxx          
           -- xxxxxx
           -- xxxxxx 
           -- xxxxxx
