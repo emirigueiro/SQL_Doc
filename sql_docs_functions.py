@@ -3,7 +3,8 @@ import pandas as pd
 import re
 from itertools import chain  
 
-# Read File
+# Read SQL File:
+#----------------------------------------------------------------------------------------------
 def read_sql_file(sql_file: str) -> str:
     """
     This function is responsible for reading the .SQL file and return its content as a string,
@@ -31,8 +32,9 @@ def read_sql_file(sql_file: str) -> str:
         raise FileNotFoundError(f"Error: The file '{sql_file}' was not found.")
     except IOError as e:
         raise IOError(f"Error reading the file '{sql_file}': {e}")     
-
-# Split Section
+    
+# Splite Section:
+#----------------------------------------------------------------------------------------------
 def split_section(sql_file: str, patron: str) -> list:
     """
     Busca todas las coincidencias del patrón dentro del contenido SQL.
@@ -53,7 +55,8 @@ def split_section(sql_file: str, patron: str) -> list:
 
     return section
 
-# Summary 
+# Suammary:
+#----------------------------------------------------------------------------------------------
 def summary(sql_file: str) -> str:
     """
     This function is responsible for extracting the "summary" section and applying the necessary transformations 
@@ -86,7 +89,9 @@ def summary(sql_file: str) -> str:
 
     return summary_docs 
 
-# Related Programs
+
+# Related Programs:
+#----------------------------------------------------------------------------------------------
 def related(sql_file: str) -> str:
     """
     This function is responsible for extracting the "related" section and applying the necessary transformations 
@@ -119,7 +124,8 @@ def related(sql_file: str) -> str:
 
     return related_docs
 
-# Source Transformation
+# Sources:
+#----------------------------------------------------------------------------------------------
 def sources(sql_file: str) -> str:
     """
     This function is responsible for extracting the "sources" section and applying the necessary transformations 
@@ -152,7 +158,8 @@ def sources(sql_file: str) -> str:
 
     return source_docs
 
-# Products Tranformation
+# Products:
+#----------------------------------------------------------------------------------------------
 def products(sql_file: str) -> str:
     """
     This function is responsible for extracting "products" section and applying the necessary transformations 
@@ -190,7 +197,8 @@ def products(sql_file: str) -> str:
 
     return products_docs
 
-# Hitorical Versions
+# Historical Versions:
+#----------------------------------------------------------------------------------------------
 def versions(sql_file: str) -> str:
     """
     This function is responsible for extracting "versions" section and applying the necessary transformations 
@@ -223,9 +231,10 @@ def versions(sql_file: str) -> str:
     # Adds a title within versions_docs.
     versions_docs = f"<h4 style='margin: 5px 0; font-size: 24px; font-weight: normal; color: #630a0a; border-bottom: 1.5px solid #ccc;'>Historical Versions</h4>\n{versions_docs}"
 
-    return versions_docs      
+    return versions_docs
 
-# Comments Transformation
+# Comments:
+#----------------------------------------------------------------------------------------------
 def comments(sql_file: str) -> str:
     """
     This function is responsible for extracting the summary section and applying the necessary transformations 
@@ -242,7 +251,7 @@ def comments(sql_file: str) -> str:
         html: object containing the query's comment section in HTML format.
     """
     # Defines a regular expression to find the general description of the query.
-    patron = r'(Step|LC)(.*?)--'
+    patron = r'(Step|NT)(.*?)--'
 
     # Finds all matches in the file content.
     coincidencias = re.findall(patron, sql_file, re.DOTALL)
@@ -284,17 +293,26 @@ def comments(sql_file: str) -> str:
     line_number = []
 
     for elemento in df_documentation_html['Comment']:
-        line_number.append(line_count(elemento, sql_file)) 
+        if pd.isna(elemento):
+            line_number.append([])
+        else:
+            line_number.append(line_count(str(elemento), sql_file))
 
-    line_number = list(chain(*line_number))
+    df_documentation_html['Line Number'] = line_number
 
-    df_documentation_html['Line Number'] = line_number  
+    # Converts the 'Line Number' column to a string and formats it. Then removes the brackets.    
+    df_documentation_html['Line Number'] = df_documentation_html['Line Number'].apply(lambda x: ', '.join(map(str, x)))
+    df_documentation_html['Line Number'] = df_documentation_html['Line Number'].str.replace('[', '', regex=False)
+    df_documentation_html['Line'] = df_documentation_html['Line Number'].str.replace(']', '', regex=False)
 
     # Replaces "LC" with "Line Comment" in the 'Comment' column.
-    df_documentation_html['Clase'] = df_documentation_html['Clase'].str.replace('LC', 'Line Comment', regex=False)
+    df_documentation_html['Clase'] = df_documentation_html['Clase'].str.replace('NT', 'Note', regex=False)
 
     # Order of the columns in the DataFrame.
-    df_documentation_html = df_documentation_html[['Order', 'Clase', 'Comment', 'Line Number']]
+    df_documentation_html = df_documentation_html[['Order', 'Clase', 'Comment', 'Line']]
+    
+    # PRUEBA
+    df_documentation_html = df_documentation_html.dropna(subset=['Comment'])
 
     # Converts the DataFrame to HTML without the index.
     table_html = df_documentation_html.to_html(index=False, escape=False)
@@ -310,7 +328,8 @@ def comments(sql_file: str) -> str:
 
     return comments_docs
 
-# HTML Creation
+# HTML Creation:
+#----------------------------------------------------------------------------------------------
 def html(summary_docs: str, related_docs: str, sources_docs: str, products_docs:str, versions_docs: str, comments_docs: str) -> str:
     """
     This function is responsible of create the html visaul style.
@@ -353,7 +372,7 @@ def html(summary_docs: str, related_docs: str, sources_docs: str, products_docs:
                 background-color: #252422;
                 color: #fffcf2;
                 text-align: left;
-                width: 100%; / Ajusta el ancho al 100% del contenedor
+                width: 100%; /* Ajusta el ancho al 100% del contenedor */
                 table-layout: auto;  /* Ajusta el ancho de las columnas al contenido */
             }}
             th, td {{
@@ -369,18 +388,20 @@ def html(summary_docs: str, related_docs: str, sources_docs: str, products_docs:
                 background-color: #444;
             }}
             .Clase {{
-                min-width: 100px; /* Ajusta el ancho de la columna Ciudad */
-            }}
+                min-width: 100px;               /* Ajusta el ancho de la columna Ciudad */
+            }} 
             .summary {{
                 font-family: Arial, sans-serif;
-                font-size: 17px; /* Aumenta el tamaño de la letra */
-                background-color: #fffcf2;
+                font-size: 17px;                /* Aumenta el tamaño de la letra */
+                background-color: #f0ecdc;
                 color: #252422;
                 text-align: left;
-                margin: 10px 0 10px 0; /* Ajusta el margen superior e inferior */
+                margin: 10px 0 10px 0;          /* Ajusta el margen superior e inferior */
                 padding: 10px;
-                border-radius: 10px; /* Redondea los bordes */
-                padding-left: 20px; /* Añade sangría a cada elemento */ 
+                border-radius: 10px;            /* Redondea los bordes */
+                padding-left: 20px;             /* Añade sangría a cada elemento */
+                white-space: pre-wrap;          /* Permite saltos de línea y adapta el texto */ 
+                
             }}
             .icono {{
                 color: #630a0a ; /* Cambia el color del icono */
@@ -393,17 +414,30 @@ def html(summary_docs: str, related_docs: str, sources_docs: str, products_docs:
             .source {{
                 font-family: Arial, sans-serif;
                 font-size: 17px; /* Aumenta el tamaño de la letra */
-                background-color: #fffcf2;
+                background-color: #f0ecdc;
                 color: #343434;
                 text-align: left;
                 margin: 10px 0 10px 0; /* Ajusta el margen superior e inferior */
                 padding: 10px;
                 border-radius: 10px; /* Redondea los bordes */
                 padding-left: 20px; /* Añade sangría a cada elemento */
+                white-space: pre-wrap; /* Permite saltos de línea y adapta el texto */
+            }}
+            /* Estilo para centrar el logo */
+            .logo-container {{
+                text-align: left;         /* Logo a la derecha */
+                padding-right: 25px;      /* Igual que el padding del body para alinear */
+            }}
+            .logo-container img {{
+                max-width: 200px; /* Tamaño máximo del logo */
+                height: auto;
             }}
         </style>
     </head>
-    <body>
+    <body>        
+        <div class="logo-container">
+        <img src="../Pictures/Logo_SQL_Docs_Wide_Up.png" alt="Logo">
+        </div>
         <pre class="summary">{summary_docs}</pre>
         <pre class="summary">{related_docs}</pre>
         <pre class="source">{sources_docs}</pre>
