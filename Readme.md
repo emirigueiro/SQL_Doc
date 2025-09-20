@@ -1,17 +1,16 @@
 
 ![Logo SQL Docs](./Pictures/Logo_SQL_Docs_Wide.PNG)
 
+___________________________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________________________
 
-
-📘 SQL Docs
-
-SQL Docs is a framework designed to standardize SQL query documentation. Its goal is to provide a clear and consistent structure that facilitates
+ SQL Docs is a framework designed to standardize SQL query documentation. Its goal is to provide a clear and consistent structure that facilitates
 readability, maintenance, and the automatic generation of documentation in HTML.
 
 ___________________________________________________________________________________________________________________________________________
 ___________________________________________________________________________________________________________________________________________
 
-🎯 Objective
+## 🎯 Objective
 
 The framework is divided into 7 sections:
 - Sections 1 to 5 must be completed before writing the SQL query.
@@ -21,7 +20,7 @@ different parts.
 ___________________________________________________________________________________________________________________________________________
 ___________________________________________________________________________________________________________________________________________
 
-📑 Framework Structure
+## 📑 Framework Structure
 
 1.  Summary → Summary of the purpose of the query.
 2.  Related Programs → Related queries.
@@ -34,7 +33,7 @@ ________________________________________________________________________________
 ___________________________________________________________________________________________________________________________________________
 ___________________________________________________________________________________________________________________________________________
 
-⚠️ Important Notes
+## ⚠️ Important Notes
 
 -   It is mandatory to follow the framework’s wording to allow for the subsequent automatic generation of HTML.
 -   Sections can be omitted depending on project needs (this does not affect HTML export).
@@ -43,7 +42,7 @@ ________________________________________________________________________________
 ___________________________________________________________________________________________________________________________________________
 ___________________________________________________________________________________________________________________________________________
 
-📑 Details of each framework section:
+## 📑 Details of each framework section:
 
 – Summary: Brief summary of the purpose of the query.
   – Created Date: xx/xx/xxxx
@@ -76,7 +75,7 @@ ________________________________________________________________________________
 ___________________________________________________________________________________________________________________________________________
 ___________________________________________________________________________________________________________________________________________
 
-📑 Framework to copy:
+## 📑 Framework to copy:
 
 –Summary:
 –Created Date: xx/xx/xxxx
