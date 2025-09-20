@@ -21,13 +21,13 @@ ________________________________________________________________________________
 
 ## 📑 Framework Structure
 
-  Summary → Summary of the purpose of the query.
-2.  Related Programs → Related queries.
-3.  Sources → Data sources used.
-4.  Products → Result of the query (table, view, insert, etc.).
-5.  Historical Versions → Change log.
-6.  Steps → Step-by-step comments and explanations of the process.
-7.  Notes (NT) → Additional observations about the query.
+*  Summary → Summary of the purpose of the query.
+*  Related Programs → Related queries.
+*  Sources → Data sources used.
+*  Products → Result of the query (table, view, insert, etc.).
+*  Historical Versions → Change log.
+*  Steps → Step-by-step comments and explanations of the process.
+*  Notes (NT) → Additional observations about the query.
 
 ___________________________________________________________________________________________________________________________________________
 
