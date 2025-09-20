@@ -54,7 +54,7 @@ if __name__ == "__main__":
         print("✅ Document generated successfully.")
 
     except FileNotFoundError as fnf_err:
-        print(f"❌ Error: {fnf_err}")
+        print(f"Error: {fnf_err}")
 
     except Exception as err:
-        print(f"⚠️ Unexpected error: {err}")
+        print(f"Unexpected error: {err}")
