@@ -1,5 +1,6 @@
 
-![Logo SQL Docs](./Pictures/Logo_SQL_Docs_Transparente.png)
+![Logo SQL Docs](./Pictures/Logo_SQL_Docs_Wide.PNG)
+
 
 
 📘 SQL Docs
